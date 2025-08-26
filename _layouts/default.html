@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<!-- Sour Theme - A Jekyll theme with TailwindCSS and DaisyUI -->
+<!-- https://github.com/your-username/jekyll-theme-sour -->
+<html lang="{{ page.lang | default: site.lang | default: "en" }}" data-theme="cyberpunk">
+{% include head.html %}
+<body class="min-h-screen">
+  <!-- Navigation Bar -->
+  <!-- Built with DaisyUI components for responsive design -->
+  <div class="navbar bg-neutral text-neutral-content sticky top-0 z-50 border-b border-primary/20">
+    <!-- Left Section: Mobile hamburger menu + Site logo -->
+    <div class="navbar-start">
+      <!-- Mobile hamburger menu - hidden on desktop (lg:hidden) -->
+      <div class="dropdown lg:hidden">
+        <div tabindex="0" role="button" class="btn btn-ghost hover:bg-primary hover:text-primary-content transition-all duration-300">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+          </svg>
+        </div>
+        <ul tabindex="0" class="menu menu-sm dropdown-content bg-neutral text-neutral-content rounded-box z-[1] mt-3 w-52 p-2 shadow-xl border border-primary/20">
+          <li><a href="{{ '/' | relative_url }}" class="hover:bg-primary hover:text-primary-content transition-all duration-300">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/>
+            </svg>
+            Home
+          </a></li>
+          <li><a href="{{ '/about' | relative_url }}" class="hover:bg-primary hover:text-primary-content transition-all duration-300">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+            </svg>
+            About
+          </a></li>
+          <li><a href="{{ '/portfolio' | relative_url }}" class="hover:bg-primary hover:text-primary-content transition-all duration-300">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"/>
+            </svg>
+            Portfolio
+          </a></li>
+          <li><a href="{{ '/services' | relative_url }}" class="hover:bg-primary hover:text-primary-content transition-all duration-300">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2-2v2m8 0V6a2 2 0 012 2v6a2 2 0 01-2 2H6a2 2 0 01-2-2V8a2 2 0 012-2V6"/>
+            </svg>
+            Services
+          </a></li>
+          <li><a href="{{ '/posts' | relative_url }}" class="hover:bg-primary hover:text-primary-content transition-all duration-300">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+            </svg>
+            Archive
+          </a></li>
+        </ul>
+      </div>
+      
+      <!-- Site Logo/Brand - links to homepage -->
+      <a class="btn btn-ghost text-xl hover:bg-primary hover:text-primary-content transition-all duration-300 hover:scale-105" href="{{ '/' | relative_url }}">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 9l3 3-3 3m5 0h3M5 20h14a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+        </svg>
+        Sour
+      </a>
+    </div>
+
+    <!-- Center Section: Search bar that grows to fill available space -->
+    <!-- Hidden on mobile (md:flex), shown on larger screens -->
+    <div class="navbar-center flex-grow hidden md:flex">
+      <div class="form-control w-full max-w-2xl">
+        <div class="join w-full">
+          <input type="search" id="navbar-search" placeholder="Search posts and pages..." class="input input-bordered join-item flex-grow bg-base-100 text-base-content placeholder:text-base-content/60" />
+          <button type="button" class="btn join-item bg-primary text-primary-content hover:bg-primary-focus">
+            <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Right Section: Desktop navigation menu - hidden on mobile -->
+    <div class="navbar-end">
+      <!-- Mobile search button - shown only on mobile (md:hidden) -->
+      <button class="btn btn-ghost btn-circle md:hidden" onclick="document.getElementById('search-modal').checked = true">
+        <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+        </svg>
+      </button>
+      
+      <ul class="menu menu-horizontal px-1 hidden lg:flex">
+        <li><a href="{{ '/' | relative_url }}" class="hover:bg-primary hover:text-primary-content transition-all duration-300 hover:scale-105">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/>
+          </svg>
+          Home
+        </a></li>
+        <li><a href="{{ '/about' | relative_url }}" class="hover:bg-primary hover:text-primary-content transition-all duration-300 hover:scale-105">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+          </svg>
+          About
+        </a></li>
+        <li><a href="{{ '/portfolio' | relative_url }}" class="hover:bg-primary hover:text-primary-content transition-all duration-300 hover:scale-105">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"/>
+          </svg>
+          Portfolio
+        </a></li>
+        <li><a href="{{ '/services' | relative_url }}" class="hover:bg-primary hover:text-primary-content transition-all duration-300 hover:scale-105">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2-2v2m8 0V6a2 2 0 012 2v6a2 2 0 01-2 2H6a2 2 0 01-2-2V8a2 2 0 012-2V6"/>
+          </svg>
+          Services
+        </a></li>
+        <li><a href="{{ '/posts' | relative_url }}" class="hover:bg-primary hover:text-primary-content transition-all duration-300 hover:scale-105">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+          </svg>
+          Archive
+        </a></li>
+      </ul>
+
+      <!-- Theme Toggle Button -->
+      <button id="theme-toggle" class="btn btn-ghost btn-circle" title="Toggle theme">
+        <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 718.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/>
+        </svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- SEO Meta Tags for screen readers and accessibility -->
+  {% if page.title %}
+    <div class="sr-only">
+      <h1>{{ page.title }}</h1>
+      {% if page.description %}<meta name="description" content="{{ page.description }}">{% endif %}
+    </div>
+  {% endif %}
+
+  <!-- Main Content Area - where page content is rendered -->
+  <main class="container mx-auto px-4 py-8">
+    {{ content | markdownify }}
+  </main>
+
+  <!-- Search Modal - include search functionality -->
+  {% include search.html %}
+
+  <!-- Website Footer -->
+  <!-- Multi-column responsive footer with site info and links -->
+    <!-- DaisyUI Multi-Column Footer -->
+  <footer class="footer footer-horizontal bg-base-200 text-base-content p-10 border-t border-primary/20">
+    <aside>
+      <svg class="w-12 h-12 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 9l3 3-3 3m5 0h3M5 20h14a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+      </svg>
+      <p class="text-lg font-bold text-primary">Sour Theme</p>
+      <p class="max-w-xs">Exploring the intersection of code, creativity, and cyberpunk aesthetics in modern development.</p>
+    </aside>
+    
+    <nav>
+      <h6 class="footer-title text-primary">Quick Links</h6>
+      <a href="{{ '/' | relative_url }}" class="link link-hover">Home</a>
+      <a href="{{ '/about' | relative_url }}" class="link link-hover">About</a>
+      <a href="{{ '/posts' | relative_url }}" class="link link-hover">Archive</a>
+      <a href="{{ '/contact' | relative_url }}" class="link link-hover">Contact</a>
+    </nav>
+    
+    <nav>
+      <h6 class="footer-title text-primary">Categories</h6>
+      <a href="#" class="link link-hover">Web Development</a>
+      <a href="#" class="link link-hover">Frontend</a>
+      <a href="#" class="link link-hover">Backend</a>
+      <a href="#" class="link link-hover">DevOps</a>
+      <a href="#" class="link link-hover">Cyberpunk Tech</a>
+    </nav>
+    
+    <nav>
+      <h6 class="footer-title text-primary">Resources</h6>
+      <a href="#" class="link link-hover">Tutorials</a>
+      <a href="#" class="link link-hover">Code Snippets</a>
+      <a href="#" class="link link-hover">Tools & Libraries</a>
+      <a href="#" class="link link-hover">Documentation</a>
+    </nav>
+    
+    <nav>
+      <h6 class="footer-title text-primary">Tech Stack</h6>
+      <div class="flex flex-wrap gap-2 max-w-xs">
+        <div class="badge badge-secondary">Jekyll</div>
+        <div class="badge badge-primary">TailwindCSS</div>
+        <div class="badge badge-accent">DaisyUI</div>
+        <div class="badge badge-info">Liquid</div>
+        <div class="badge badge-warning">GitHub Pages</div>
+      </div>
+    </nav>
+
+    <nav>
+      <h6 class="footer-title text-primary">Social</h6>
+      <div class="grid grid-flow-col gap-4">
+        <a href="#" class="link link-hover" aria-label="GitHub">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" class="fill-current">
+            <path d="M12 2C6.477 2 2 6.477 2 12c0 4.418 2.865 8.166 6.839 9.489.5.092.682-.217.682-.482 0-.237-.008-.866-.013-1.7-2.782.604-3.369-1.341-3.369-1.341-.454-1.155-1.11-1.462-1.11-1.462-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.087 2.91.831.092-.646.35-1.086.636-1.336-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.269 2.75 1.025A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.294 2.747-1.025 2.747-1.025.546 1.377.203 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.743 0 .267.18.579.688.481C19.138 20.161 22 16.416 22 12c0-5.523-4.477-10-10-10z"/>
+          </svg>
+        </a>
+        <a href="#" class="link link-hover" aria-label="Twitter">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" class="fill-current">
+            <path d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045-4.091-.205-7.719-2.165-10.148-5.144-1.29 2.213-.669 5.108 1.523 6.574-.806-.026-1.566-.247-2.229-.616-.054 2.281 1.581 4.415 3.949 4.89-.693.188-1.452.232-2.224.084.626 1.956 2.444 3.379 4.6 3.419-2.07 1.623-4.678 2.348-7.29 2.04 2.179 1.397 4.768 2.212 7.548 2.212 9.142 0 14.307-7.721 13.995-14.646.962-.695 1.797-1.562 2.457-2.549z"/>
+          </svg>
+        </a>
+        <a href="#" class="link link-hover" aria-label="LinkedIn">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" class="fill-current">
+            <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+          </svg>
+        </a>
+      </div>
+    </nav>
+  </footer>
+
+  <!-- Footer Copyright Bar -->
+  <footer class="footer footer-center bg-base-300 text-base-content p-4 border-t border-primary/20">
+    <aside>
+      <p>&copy; {{ 'now' | date: "%Y" }} Sour Theme. All rights reserved. | Built with 
+        <span class="text-primary">Jekyll</span> & 
+        <span class="text-secondary">DaisyUI</span>
+      </p>
+    </aside>
+  </footer>
+
+  <!-- Theme Toggle Script -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const themeToggle = document.getElementById('theme-toggle');
+      const htmlElement = document.documentElement;
+      
+      if (!themeToggle) {
+        console.error('Theme toggle button not found!');
+        return;
+      }
+      
+      // Theme names available in DaisyUI
+      const themes = ['dark', 'cyberpunk'];
+      let currentThemeIndex = 1; // Start with cyberpunk as default
+      
+      // Load saved theme or default to cyberpunk
+      const savedTheme = localStorage.getItem('theme') || 'cyberpunk';
+      currentThemeIndex = themes.indexOf(savedTheme);
+      if (currentThemeIndex === -1) currentThemeIndex = 1; // Default to cyberpunk (index 1)
+      
+      console.log('Initial theme:', themes[currentThemeIndex]);
+      
+      // Apply initial theme
+      htmlElement.setAttribute('data-theme', themes[currentThemeIndex]);
+      
+      function updateThemeIcon(theme) {
+        const icon = themeToggle.querySelector('svg');
+        if (!icon) return;
+        
+        if (theme === 'dark') {
+          // Sun icon for dark theme (shows what clicking will switch TO)
+          icon.innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"/>';
+        } else {
+          // Moon icon for cyberpunk theme (shows what clicking will switch TO)
+          icon.innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/>';
+        }
+      }
+      
+      // Theme toggle click handler
+      themeToggle.addEventListener('click', function(e) {
+        e.preventDefault();
+        console.log('Theme toggle clicked!');
+        
+        // Cycle to next theme
+        currentThemeIndex = (currentThemeIndex + 1) % themes.length;
+        const newTheme = themes[currentThemeIndex];
+        
+        console.log('Switching to theme:', newTheme);
+        
+        // Apply new theme
+        htmlElement.setAttribute('data-theme', newTheme);
+        
+        // Save to localStorage
+        try {
+          localStorage.setItem('theme', newTheme);
+        } catch (e) {
+          console.warn('Could not save theme to localStorage:', e);
+        }
+        
+        // Update button icon based on theme
+        updateThemeIcon(newTheme);
+        
+        return false;
+      });
+      
+      // Update icon based on current theme
+      updateThemeIcon(themes[currentThemeIndex]);
+    });
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,120 @@
+---
+layout: default
+title: "All Tags"
+description: "Browse all tags and topics covered on this blog"
+permalink: /tag/
+---
+
+<div class="hero bg-base-200 py-12">
+  <div class="hero-content text-center">
+    <div class="max-w-4xl">
+      <h1 class="text-5xl font-bold text-primary mb-6">{{ page.title }}</h1>
+      <p class="text-xl text-base-content/80 mb-8">{{ page.description }}</p>
+    </div>
+  </div>
+</div>
+
+<div class="container mx-auto px-4 py-8">
+  <div class="card bg-base-100 shadow-xl">
+    <div class="card-body">
+      {% assign tags = site.tags | sort %}
+      {% if tags.size > 0 %}
+        <div class="grid gap-6">
+          {% for tag in tags %}
+            {% assign tag_name = tag[0] %}
+            {% assign tag_posts = tag[1] %}
+            
+            <div class="border-b border-base-300 last:border-b-0 pb-6 last:pb-0">
+              <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-4">
+                <div>
+                  <h2 class="text-2xl font-bold">
+                    <a href="/tag/{{ tag_name | slugify }}/" class="link link-primary hover:link-accent transition-colors">
+                      {{ tag_name }}
+                    </a>
+                  </h2>
+                  <p class="text-base-content/60">
+                    {{ tag_posts.size }} post{% if tag_posts.size != 1 %}s{% endif %}
+                  </p>
+                </div>
+                <div class="badge badge-primary badge-lg">
+                  {{ tag_posts.size }}
+                </div>
+              </div>
+              
+              <div class="grid gap-3">
+                {% for post in tag_posts limit:3 %}
+                  <div class="flex items-start gap-3 p-3 bg-base-200 rounded-lg hover:bg-base-300 transition-colors">
+                    <div class="flex-1">
+                      <h3 class="font-semibold text-sm">
+                        <a href="{{ post.url | relative_url }}" class="link link-primary">
+                          {{ post.title }}
+                        </a>
+                      </h3>
+                      <div class="text-xs text-base-content/60 mt-1">
+                        {{ post.date | date: "%b %d, %Y" }}
+                      </div>
+                    </div>
+                  </div>
+                {% endfor %}
+                
+                {% if tag_posts.size > 3 %}
+                  <div class="text-center">
+                    <a href="/tag/{{ tag_name | slugify }}/" class="btn btn-outline btn-sm">
+                      View all {{ tag_posts.size }} posts →
+                    </a>
+                  </div>
+                {% endif %}
+              </div>
+            </div>
+          {% endfor %}
+        </div>
+      {% else %}
+        <div class="text-center py-12">
+          <div class="mb-4">
+            <svg class="w-16 h-16 mx-auto text-base-content/40" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z"/>
+            </svg>
+          </div>
+          <p class="text-base-content/60 mb-4">No tags found.</p>
+          <a href="{{ '/' | relative_url }}" class="btn btn-primary">Back to Home</a>
+        </div>
+      {% endif %}
+    </div>
+  </div>
+
+  <!-- Tag Cloud -->
+  {% if tags.size > 0 %}
+  <div class="card bg-base-100 shadow-xl mt-8">
+    <div class="card-body">
+      <h2 class="card-title mb-6">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z"/>
+        </svg>
+        Tag Cloud
+      </h2>
+      
+      <div class="flex flex-wrap gap-3">
+        {% for tag in tags %}
+          {% assign tag_name = tag[0] %}
+          {% assign tag_posts = tag[1] %}
+          {% assign post_count = tag_posts.size %}
+          
+          {% comment %} Calculate tag size based on post count {% endcomment %}
+          {% if post_count >= 5 %}
+            {% assign tag_size = "badge-lg" %}
+          {% elsif post_count >= 3 %}
+            {% assign tag_size = "badge-md" %}
+          {% else %}
+            {% assign tag_size = "badge-sm" %}
+          {% endif %}
+          
+          <a href="/tag/{{ tag_name | slugify }}/" 
+             class="badge badge-primary badge-outline hover:badge-primary transition-all {{ tag_size }}">
+            {{ tag_name }} ({{ post_count }})
+          </a>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+  {% endif %}
+</div>

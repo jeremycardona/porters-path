@@ -1,0 +1,12 @@
+_site
+.sass-cache
+.jekyll-cache
+.jekyll-metadata
+vendor
+# Node.js
+node_modules/
+npm-debug.log*
+
+# Generated CSS
+assets/css/main.css
+assets/css/main.css.map

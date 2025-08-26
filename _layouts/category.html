@@ -1,0 +1,62 @@
+---
+layout: default
+---
+
+<div class="hero bg-base-200 py-12">
+  <div class="hero-content text-center">
+    <div class="max-w-4xl">
+      <h1 class="text-5xl font-bold text-primary mb-6">{{ page.title }}</h1>
+      <p class="text-xl text-base-content/80 mb-8">Posts in "{{ page.title }}" category</p>
+    </div>
+  </div>
+</div>
+
+<div class="container mx-auto px-4 py-8">
+  <div class="grid gap-6 md:gap-8">
+    {% if page.posts.size > 0 %}
+      {% for post in page.posts %}
+        <article class="card bg-base-100 shadow-xl hover:shadow-2xl transition-shadow">
+          <div class="card-body">
+            <h2 class="card-title text-2xl">
+              <a href="{{ post.url | relative_url }}" class="link link-primary">
+                {{ post.title }}
+              </a>
+            </h2>
+            
+            <div class="flex items-center gap-4 text-base-content/60 text-sm mb-4">
+              <time datetime="{{ post.date | date_to_xmlschema }}">
+                {{ post.date | date: "%B %d, %Y" }}
+              </time>
+              {% if post.author %}
+                <span>• {{ post.author }}</span>
+              {% endif %}
+            </div>
+            
+            <p class="text-base-content/80 mb-4">
+              {{ post.excerpt | strip_html | truncate: 200 }}
+            </p>
+            
+            {% if post.categories.size > 0 %}
+              <div class="flex flex-wrap gap-2 mb-4">
+                {% for category in post.categories %}
+                  <span class="badge badge-secondary badge-outline badge-sm">{{ category }}</span>
+                {% endfor %}
+              </div>
+            {% endif %}
+            
+            <div class="card-actions justify-end">
+              <a href="{{ post.url | relative_url }}" class="btn btn-primary btn-sm">
+                Read More
+              </a>
+            </div>
+          </div>
+        </article>
+      {% endfor %}
+    {% else %}
+      <div class="text-center py-12">
+        <p class="text-base-content/60">No posts found in this category.</p>
+        <a href="{{ '/' | relative_url }}" class="btn btn-primary mt-4">Back to Home</a>
+      </div>
+    {% endif %}
+  </div>
+</div>

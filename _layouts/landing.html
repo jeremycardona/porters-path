@@ -1,0 +1,241 @@
+---
+layout: default
+---
+
+<div class="container mx-auto px-4 py-8">
+  <!-- Hero Section -->
+  <section class="hero bg-base-200 rounded-lg py-16 mb-16">
+    <div class="hero-content text-center">
+      <div class="max-w-4xl">
+        <h1 class="text-5xl md:text-6xl font-bold text-primary mb-6 [text-shadow:0_0_10px_currentColor]">
+          {{ page.hero.title | default: page.title }}
+        </h1>
+        {% if page.hero.subtitle %}
+          <p class="text-xl md:text-2xl text-base-content/80 mb-8 leading-relaxed">
+            {{ page.hero.subtitle }}
+          </p>
+        {% endif %}
+        {% if page.hero.description %}
+          <p class="text-lg text-base-content/70 mb-8 max-w-2xl mx-auto">
+            {{ page.hero.description }}
+          </p>
+        {% endif %}
+        
+        <!-- Hero CTA Buttons -->
+        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+          {% if page.hero.primary_cta %}
+            <a href="{{ page.hero.primary_cta.url | relative_url }}" class="btn btn-primary btn-lg group">
+              <span>{{ page.hero.primary_cta.text }}</span>
+              <svg class="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+              </svg>
+            </a>
+          {% endif %}
+          {% if page.hero.secondary_cta %}
+            <a href="{{ page.hero.secondary_cta.url | relative_url }}" class="btn btn-outline btn-lg">
+              {{ page.hero.secondary_cta.text }}
+            </a>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Features Section -->
+  {% if page.features and page.features.size > 0 %}
+    <section class="mb-16">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl md:text-4xl font-bold text-accent mb-4 [text-shadow:0_0_10px_currentColor]">
+          {{ page.features_title | default: "Features" }}
+        </h2>
+        {% if page.features_subtitle %}
+          <p class="text-lg text-base-content/80 max-w-2xl mx-auto">
+            {{ page.features_subtitle }}
+          </p>
+        {% endif %}
+      </div>
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {% for feature in page.features %}
+          <div class="card bg-base-200 border border-primary/30 shadow-[0_0_20px_rgba(0,255,255,0.3)] hover:shadow-[0_0_30px_rgba(0,255,255,0.6)] transition-all duration-300">
+            <div class="card-body p-8 text-center">
+              {% if feature.icon %}
+                <div class="mx-auto w-16 h-16 rounded-full bg-primary/20 flex items-center justify-center mb-4">
+                  {{ feature.icon }}
+                </div>
+              {% endif %}
+              <h3 class="card-title text-xl font-bold mb-3 text-white justify-center">
+                {{ feature.title }}
+              </h3>
+              <p class="text-base-content/80 text-sm">
+                {{ feature.description }}
+              </p>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+    </section>
+  {% endif %}
+
+  <!-- Benefits Section -->
+  {% if page.benefits and page.benefits.size > 0 %}
+    <section class="mb-16">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl md:text-4xl font-bold text-secondary mb-4 [text-shadow:0_0_10px_currentColor]">
+          {{ page.benefits_title | default: "Why Choose Us" }}
+        </h2>
+        {% if page.benefits_subtitle %}
+          <p class="text-lg text-base-content/80 max-w-2xl mx-auto">
+            {{ page.benefits_subtitle }}
+          </p>
+        {% endif %}
+      </div>
+      
+      <div class="space-y-8">
+        {% for benefit in page.benefits %}
+          <div class="card bg-base-100 shadow-xl">
+            <div class="card-body p-8">
+              <div class="flex flex-col lg:flex-row items-center gap-8">
+                {% if benefit.image %}
+                  <div class="flex-shrink-0">
+                    <img src="{{ benefit.image | relative_url }}" alt="{{ benefit.title }}" class="w-24 h-24 rounded-full object-cover">
+                  </div>
+                {% endif %}
+                <div class="flex-1 text-center lg:text-left">
+                  <h3 class="text-2xl font-bold text-primary mb-3">{{ benefit.title }}</h3>
+                  <p class="text-base-content/80">{{ benefit.description }}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+    </section>
+  {% endif %}
+
+  <!-- Testimonials Section -->
+  {% if page.testimonials and page.testimonials.size > 0 %}
+    <section class="mb-16">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl md:text-4xl font-bold text-accent mb-4 [text-shadow:0_0_10px_currentColor]">
+          {{ page.testimonials_title | default: "What People Say" }}
+        </h2>
+      </div>
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {% for testimonial in page.testimonials %}
+          <div class="card bg-base-200 border border-secondary/30">
+            <div class="card-body p-6">
+              <div class="flex items-center mb-4">
+                {% for i in (1..5) %}
+                  <svg class="w-4 h-4 text-yellow-400" fill="currentColor" viewBox="0 0 20 20">
+                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
+                  </svg>
+                {% endfor %}
+              </div>
+              <p class="text-base-content/80 mb-4 italic">"{{ testimonial.quote }}"</p>
+              <div class="flex items-center">
+                {% if testimonial.avatar %}
+                  <img src="{{ testimonial.avatar | relative_url }}" alt="{{ testimonial.name }}" class="w-10 h-10 rounded-full mr-3">
+                {% endif %}
+                <div>
+                  <p class="font-semibold text-white">{{ testimonial.name }}</p>
+                  {% if testimonial.role %}
+                    <p class="text-sm text-base-content/60">{{ testimonial.role }}</p>
+                  {% endif %}
+                </div>
+              </div>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+    </section>
+  {% endif %}
+
+  <!-- Pricing Section -->
+  {% if page.pricing and page.pricing.size > 0 %}
+    <section class="mb-16">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl md:text-4xl font-bold text-primary mb-4 [text-shadow:0_0_10px_currentColor]">
+          {{ page.pricing_title | default: "Pricing Plans" }}
+        </h2>
+        {% if page.pricing_subtitle %}
+          <p class="text-lg text-base-content/80 max-w-2xl mx-auto">
+            {{ page.pricing_subtitle }}
+          </p>
+        {% endif %}
+      </div>
+      
+      <div class="grid grid-cols-1 md:grid-cols-{{ page.pricing.size }} gap-8">
+        {% for plan in page.pricing %}
+          <div class="card bg-base-200 border border-primary/30 {% if plan.featured %}ring-2 ring-primary shadow-[0_0_30px_rgba(0,255,255,0.6)]{% endif %}">
+            <div class="card-body p-8 text-center">
+              {% if plan.featured %}
+                <div class="badge badge-primary absolute -top-3 left-1/2 transform -translate-x-1/2">Most Popular</div>
+              {% endif %}
+              
+              <h3 class="text-2xl font-bold text-white mb-2">{{ plan.name }}</h3>
+              <div class="text-4xl font-bold text-primary mb-4">
+                <span class="text-lg">$</span>{{ plan.price }}<span class="text-base text-base-content/60">/{{ plan.period | default: "mo" }}</span>
+              </div>
+              
+              {% if plan.description %}
+                <p class="text-base-content/80 mb-6">{{ plan.description }}</p>
+              {% endif %}
+              
+              {% if plan.features %}
+                <ul class="space-y-2 mb-8 text-sm">
+                  {% for feature in plan.features %}
+                    <li class="flex items-center">
+                      <svg class="w-4 h-4 text-green-400 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                      </svg>
+                      {{ feature }}
+                    </li>
+                  {% endfor %}
+                </ul>
+              {% endif %}
+              
+              <a href="{{ plan.cta_url | default: '#' | relative_url }}" class="btn {% if plan.featured %}btn-primary{% else %}btn-outline btn-primary{% endif %} w-full">
+                {{ plan.cta_text | default: "Get Started" }}
+              </a>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+    </section>
+  {% endif %}
+
+  <!-- Additional Content -->
+  {% if content and content != empty %}
+    <section class="mb-16">
+      <div class="post-content">
+        <div class="card bg-base-100 shadow-xl">
+          <div class="card-body">
+            {{ content | markdownify}}
+          </div>
+        </div>
+      </div>
+    </section>
+  {% endif %}
+
+  <!-- Final CTA Section -->
+  {% if page.final_cta %}
+    <section class="text-center">
+      <div class="card bg-base-200 border border-primary/30">
+        <div class="card-body p-12">
+          <h2 class="text-3xl md:text-4xl font-bold text-primary mb-4">{{ page.final_cta.title }}</h2>
+          {% if page.final_cta.description %}
+            <p class="text-lg text-base-content/80 mb-8 max-w-2xl mx-auto">{{ page.final_cta.description }}</p>
+          {% endif %}
+          <a href="{{ page.final_cta.url | relative_url }}" class="btn btn-primary btn-lg group">
+            <span>{{ page.final_cta.button_text }}</span>
+            <svg class="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+            </svg>
+          </a>
+        </div>
+      </div>
+    </section>
+  {% endif %}
+</div>

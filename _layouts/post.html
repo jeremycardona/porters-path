@@ -1,0 +1,208 @@
+---
+layout: default
+---
+
+<div class="container mx-auto px-4 py-8">
+  <div class="flex flex-col lg:flex-row gap-8">
+    
+    <!-- Main Content -->
+    <article class="prose prose-lg flex-1 min-w-0 max-w-none">
+      <header class="mb-8">
+        <h1 class="text-4xl font-bold mb-4">{{ page.title }}</h1>
+        <div class="text-base-content/60">
+          <time datetime="{{ page.date | date_to_xmlschema }}">{{ page.date | date: "%B %d, %Y" }}</time>
+          {% if page.author %} • {{ page.author }}{% endif %}
+        </div>
+      </header>
+
+      <div class="post-content">
+        {{ content }}
+      </div>
+
+      <footer class="mt-12 pt-8 border-t border-base-300">
+        <div class="flex justify-between">
+          {% if page.previous.url %}
+            <a href="{{ page.previous.url | relative_url }}" class="btn btn-outline">← {{ page.previous.title }}</a>
+          {% endif %}
+          {% if page.next.url %}
+            <a href="{{ page.next.url | relative_url }}" class="btn btn-outline">{{ page.next.title }} →</a>
+          {% endif %}
+        </div>
+      </footer>
+
+      <!-- Comments Section -->
+      {% if site.comments.enabled and page.comments != false %}
+      <div class="mt-12 pt-8">
+        <div class="card bg-base-100 shadow-xl">
+          <div class="card-body">
+            <h3 class="card-title text-2xl mb-6 flex items-center gap-3">
+              <svg class="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"/>
+              </svg>
+              Comments
+            </h3>
+            
+            <div class="prose max-w-none">
+              <p class="text-base-content/70 mb-6">
+                Comments are powered by 
+                <a href="https://utteranc.es" class="link link-primary" target="_blank" rel="noopener">Utterances</a>. 
+                You'll need a GitHub account to comment.
+              </p>
+            </div>
+
+            <!-- Utterances Comments -->
+            <div id="comments-container" class="min-h-[200px]">
+              {% if site.comments.provider == "utterances" %}
+              <script src="https://utteranc.es/client.js"
+                      repo="{{ site.comments.utterances.repo }}"
+                      issue-term="{{ site.comments.utterances.issue-term }}"
+                      theme="{{ site.comments.utterances.theme }}"
+                      crossorigin="{{ site.comments.utterances.crossorigin }}"
+                      async>
+              </script>
+              {% endif %}
+            </div>
+
+            <!-- Loading State -->
+            <div id="comments-loading" class="flex items-center justify-center py-12">
+              <div class="loading loading-spinner loading-lg text-primary"></div>
+              <span class="ml-3 text-base-content/60">Loading comments...</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Comments Theme Sync Script -->
+      <script>
+      (function() {
+        // Hide loading state when utterances iframe loads
+        const observer = new MutationObserver(function(mutations) {
+          mutations.forEach(function(mutation) {
+            if (mutation.type === 'childList') {
+              const iframe = document.querySelector('#comments-container iframe');
+              if (iframe) {
+                // Hide loading state
+                const loading = document.getElementById('comments-loading');
+                if (loading) {
+                  loading.style.display = 'none';
+                }
+                observer.disconnect();
+              }
+            }
+          });
+        });
+
+        const commentsContainer = document.getElementById('comments-container');
+        if (commentsContainer) {
+          observer.observe(commentsContainer, { childList: true, subtree: true });
+        }
+
+        // Sync theme changes with utterances
+        function syncUtterancesTheme() {
+          const iframe = document.querySelector('#comments-container iframe');
+          if (iframe) {
+            const theme = document.documentElement.getAttribute('data-theme');
+            let utterancesTheme = 'github-light';
+            
+            if (theme === 'dark') {
+              utterancesTheme = 'github-dark';
+            } else if (theme === 'cyberpunk') {
+              utterancesTheme = 'github-dark-orange';
+            }
+            
+            iframe.contentWindow.postMessage(
+              { type: 'set-theme', theme: utterancesTheme },
+              'https://utteranc.es'
+            );
+          }
+        }
+
+        // Listen for theme changes
+        if (typeof window.themeChangeCallbacks === 'undefined') {
+          window.themeChangeCallbacks = [];
+        }
+        window.themeChangeCallbacks.push(syncUtterancesTheme);
+      })();
+      </script>
+      {% endif %}
+    </article>
+
+    <!-- Sidebar -->
+    <aside class="lg:w-80 order-first lg:order-last">
+      <div class="sticky top-8 max-h-screen overflow-y-auto space-y-6 pb-8">
+        
+        <!-- Reading Stats -->
+        <div class="card bg-base-200 shadow-lg">
+          <div class="card-body p-6">
+            <h3 class="card-title text-lg mb-4">Reading Info</h3>
+            <div class="space-y-3">
+              <div class="flex items-center gap-3">
+                <svg class="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                </svg>
+                <span>{{ page.content | reading_time }}</span>
+              </div>
+              <div class="flex items-center gap-3">
+                <svg class="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+                </svg>
+                <span>{{ page.content | number_of_words }} words</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Table of Contents -->
+        {% if page.toc %}
+        <div class="card bg-base-200 shadow-lg">
+          <div class="card-body p-6">
+            <h3 class="card-title text-lg mb-4">Table of Contents</h3>
+            <div class="toc-content text-sm">
+              {{ content | toc_only }}
+            </div>
+          </div>
+        </div>
+        {% endif %}
+
+        <!-- Categories -->
+        {% if page.category or page.categories %}
+        <div class="card bg-base-200 shadow-lg">
+          <div class="card-body p-6">
+            <h3 class="card-title text-lg mb-4">Categories</h3>
+            <div class="flex flex-wrap gap-2">
+              {% if page.category %}
+                <a href="/category/{{ page.category | slugify }}/" class="badge badge-secondary badge-outline hover:badge-secondary transition-colors">
+                  {{ page.category }}
+                </a>
+              {% endif %}
+              {% for category in page.categories %}
+                <a href="/category/{{ category | slugify }}/" class="badge badge-secondary badge-outline hover:badge-secondary transition-colors">
+                  {{ category }}
+                </a>
+              {% endfor %}
+            </div>
+          </div>
+        </div>
+        {% endif %}
+
+        <!-- Tags -->
+        {% if page.tags %}
+        <div class="card bg-base-200 shadow-lg">
+          <div class="card-body p-6">
+            <h3 class="card-title text-lg mb-4">Tags</h3>
+            <div class="flex flex-wrap gap-2">
+              {% for tag in page.tags %}
+                <a href="/tag/{{ tag | slugify }}/" class="badge badge-primary badge-outline hover:badge-primary transition-colors">
+                  {{ tag }}
+                </a>
+              {% endfor %}
+            </div>
+          </div>
+        </div>
+        {% endif %}
+
+      </div>
+    </aside>
+
+  </div>
+</div>

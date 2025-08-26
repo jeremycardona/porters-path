@@ -1,0 +1,337 @@
+<!-- Desktop Search Results Dropdown -->
+<div id="search-dropdown" class="dropdown-content menu bg-base-100 rounded-box z-[999] w-full max-w-2xl p-2 shadow-xl border border-base-300 hidden fixed top-20 left-1/2 transform -translate-x-1/2">
+  <div id="desktop-search-results" class="space-y-2 max-h-96 overflow-y-auto">
+    <div id="desktop-search-placeholder" class="text-center text-base-content/60 py-4">
+      <p class="text-sm">Start typing to search...</p>
+    </div>
+  </div>
+</div>
+
+<!-- Mobile Search Modal -->
+<input type="checkbox" id="search-modal" class="modal-toggle" />
+<div class="modal">
+  <div class="modal-box max-w-2xl">
+    <label for="search-modal" class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</label>
+    <h3 class="font-bold text-lg mb-4">Search Posts</h3>
+    
+    <!-- Mobile search input -->
+    <div class="form-control mb-4">
+      <input type="search" id="mobile-search" placeholder="Search posts and pages..." 
+             class="input input-bordered w-full bg-base-100 text-base-content" />
+    </div>
+    
+    <!-- Mobile search results -->
+    <div id="mobile-search-results" class="space-y-2 max-h-96 overflow-y-auto">
+      <div id="mobile-search-placeholder" class="text-center text-base-content/60 py-8">
+        <svg class="w-12 h-12 mx-auto mb-4 text-base-content/40" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+        </svg>
+        <p class="text-sm">Start typing to search...</p>
+      </div>
+    </div>
+  </div>
+  <label class="modal-backdrop" for="search-modal">Close</label>
+</div>
+
+<!-- Search Script -->
+<script src="https://unpkg.com/lunr/lunr.js"></script>
+<script>
+(function() {
+  let searchIndex = null;
+  let documents = [];
+  let isIndexReady = false;
+
+  // Load search index
+  fetch('{{ "/search.json" | relative_url }}')
+    .then(response => {
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+      return response.json();
+    })
+    .then(data => {
+      documents = data;
+      
+      // Build lunr index
+      searchIndex = lunr(function () {
+        this.ref('id');
+        this.field('title', { boost: 10 });
+        this.field('content');
+        this.field('excerpt', { boost: 5 });
+        this.field('categories');
+        this.field('tags');
+        
+        documents.forEach(doc => {
+          this.add(doc);
+        });
+      });
+      
+      isIndexReady = true;
+    })
+    .catch(error => {
+      console.error('Error loading search index:', error);
+    });
+
+  // Highlight search terms
+  function highlightText(text, query) {
+    if (!text || !query || !query.trim()) return text || '';
+    
+    const terms = query.toLowerCase().split(/\s+/).filter(term => term.length > 0);
+    let highlightedText = text.toString();
+    
+    terms.forEach(term => {
+      const regex = new RegExp(`(${term.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')})`, 'gi');
+      highlightedText = highlightedText.replace(regex, '<mark class="bg-primary/30 text-primary-content font-medium">$1</mark>');
+    });
+    
+    return highlightedText;
+  }
+
+  // Search functions (shared between desktop and mobile)
+  function performSearch(query, isDesktop = true) {
+    if (!isIndexReady || !query.trim()) {
+      if (isDesktop) {
+        hideDesktopResults();
+      } else {
+        hideMobileResults();
+      }
+      return;
+    }
+
+    try {
+      const results = searchIndex.search(query);
+      if (isDesktop) {
+        displayDesktopResults(results, query);
+      } else {
+        displayMobileResults(results, query);
+      }
+    } catch (error) {
+      console.error('Search error:', error);
+      if (isDesktop) {
+        hideDesktopResults();
+      } else {
+        hideMobileResults();
+      }
+    }
+  }
+
+  // Desktop search function (backward compatibility)
+  function performDesktopSearch(query) {
+    performSearch(query, true);
+  }
+
+  function displayDesktopResults(results, query) {
+    const dropdown = document.getElementById('search-dropdown');
+    const resultsContainer = document.getElementById('desktop-search-results');
+    const placeholder = document.getElementById('desktop-search-placeholder');
+    
+    placeholder.style.display = 'none';
+    dropdown.classList.remove('hidden');
+    
+    if (results.length === 0) {
+      resultsContainer.innerHTML = `
+        <div class="text-center text-base-content/60 py-4">
+          <p class="text-sm">No results found.</p>
+        </div>
+      `;
+      return;
+    }
+
+    const resultsHTML = results.slice(0, 5).map(result => {
+      const doc = documents.find(d => d.id.toString() === result.ref);
+      if (!doc) return '';
+      
+      const highlightedTitle = highlightText(doc.title, query);
+      
+      return `
+        <li>
+          <a href="${doc.url}" class="text-sm hover:bg-base-200 transition-colors">
+            <div class="flex flex-col">
+              <span class="font-medium text-base-content">${highlightedTitle}</span>
+              <span class="text-xs text-base-content/70">${doc.date || ''}</span>
+            </div>
+          </a>
+        </li>
+      `;
+    }).join('');
+    
+    resultsContainer.innerHTML = resultsHTML;
+  }
+
+  function hideDesktopResults() {
+    const dropdown = document.getElementById('search-dropdown');
+    const placeholder = document.getElementById('desktop-search-placeholder');
+    
+    if (dropdown) dropdown.classList.add('hidden');
+    if (placeholder) placeholder.style.display = 'block';
+  }
+
+  // Mobile search functions
+  function displayMobileResults(results, query) {
+    const resultsContainer = document.getElementById('mobile-search-results');
+    const placeholder = document.getElementById('mobile-search-placeholder');
+    
+    placeholder.style.display = 'none';
+    
+    if (results.length === 0) {
+      resultsContainer.innerHTML = `
+        <div class="text-center text-base-content/60 py-8">
+          <svg class="w-12 h-12 mx-auto mb-4 text-base-content/40" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.172 16.172a4 4 0 015.656 0M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+          </svg>
+          <p class="text-sm">No results found for "${query}"</p>
+        </div>
+      `;
+      return;
+    }
+
+    const resultsHTML = results.slice(0, 10).map(result => {
+      const doc = documents.find(d => d.id.toString() === result.ref);
+      if (!doc) return '';
+      
+      const highlightedTitle = highlightText(doc.title, query);
+      const excerpt = doc.excerpt ? doc.excerpt.substring(0, 120) + '...' : '';
+      
+      return `
+        <a href="${doc.url}" class="block">
+          <div class="card bg-base-200 hover:bg-base-300 transition-colors cursor-pointer">
+            <div class="card-body p-4">
+              <h4 class="card-title text-sm font-medium">${highlightedTitle}</h4>
+              <p class="text-xs text-base-content/70 mb-2">${excerpt}</p>
+              <div class="flex justify-between items-center text-xs text-base-content/60">
+                <span>${doc.date || ''}</span>
+                ${doc.categories ? `<span class="badge badge-primary badge-xs">${doc.categories[0]}</span>` : ''}
+              </div>
+            </div>
+          </div>
+        </a>
+      `;
+    }).join('');
+    
+    resultsContainer.innerHTML = resultsHTML;
+  }
+
+  function hideMobileResults() {
+    const resultsContainer = document.getElementById('mobile-search-results');
+    const placeholder = document.getElementById('mobile-search-placeholder');
+    
+    if (resultsContainer) {
+      resultsContainer.innerHTML = `
+        <div id="mobile-search-placeholder" class="text-center text-base-content/60 py-8">
+          <svg class="w-12 h-12 mx-auto mb-4 text-base-content/40" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+          </svg>
+          <p class="text-sm">Start typing to search...</p>
+        </div>
+      `;
+    }
+  }
+
+  // Event listeners
+  document.addEventListener('DOMContentLoaded', function() {
+    const navbarSearch = document.getElementById('navbar-search');
+    const mobileSearch = document.getElementById('mobile-search');
+    const searchDropdown = document.getElementById('search-dropdown');
+    
+    // Prevent any form submissions that might cause page reloads
+    document.addEventListener('submit', function(e) {
+      e.preventDefault();
+      return false;
+    });
+    
+    // Desktop search setup
+    if (navbarSearch) {
+      setupDesktopSearch(navbarSearch);
+    }
+    
+    // Mobile search setup
+    if (mobileSearch) {
+      setupMobileSearch(mobileSearch);
+    }
+  });
+
+  function setupDesktopSearch(navbarSearch) {
+    // Desktop search (navbar)
+    let desktopSearchTimeout;
+    navbarSearch.addEventListener('input', function() {
+      clearTimeout(desktopSearchTimeout);
+      desktopSearchTimeout = setTimeout(() => {
+        performDesktopSearch(this.value);
+      }, 500);
+    });
+
+    navbarSearch.addEventListener('focus', function() {
+      if (this.value.trim()) {
+        performDesktopSearch(this.value);
+      }
+    });
+
+    navbarSearch.addEventListener('keypress', function(e) {
+      if (e.key === 'Enter') {
+        e.preventDefault();
+        const dropdown = document.getElementById('search-dropdown');
+        const firstLink = dropdown.querySelector('a');
+        if (firstLink) {
+          firstLink.click();
+        }
+      }
+    });
+
+    // Hide dropdown when clicking outside
+    document.addEventListener('click', function(e) {
+      const searchContainer = navbarSearch.closest('.navbar-center');
+      if (searchContainer && !searchContainer.contains(e.target)) {
+        hideDesktopResults();
+      }
+    });
+
+    // Keyboard shortcut (Cmd/Ctrl + K)
+    document.addEventListener('keydown', function(e) {
+      if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
+        e.preventDefault();
+        navbarSearch.focus();
+      }
+    });
+  }
+
+  function setupMobileSearch(mobileSearch) {
+    // Mobile search
+    let mobileSearchTimeout;
+    mobileSearch.addEventListener('input', function() {
+      clearTimeout(mobileSearchTimeout);
+      mobileSearchTimeout = setTimeout(() => {
+        performSearch(this.value, false);
+      }, 500);
+    });
+
+    mobileSearch.addEventListener('focus', function() {
+      if (this.value.trim()) {
+        performSearch(this.value, false);
+      }
+    });
+
+    mobileSearch.addEventListener('keypress', function(e) {
+      if (e.key === 'Enter') {
+        e.preventDefault();
+        // Don't auto-click first result, let user choose
+      }
+    });
+
+    // Auto-focus mobile search when modal opens
+    const searchModal = document.getElementById('search-modal');
+    if (searchModal) {
+      searchModal.addEventListener('change', function() {
+        if (this.checked) {
+          setTimeout(() => {
+            mobileSearch.focus();
+          }, 100);
+        } else {
+          // Clear search when modal closes
+          mobileSearch.value = '';
+          hideMobileResults();
+        }
+      });
+    }
+  }
+})();
+</script>
