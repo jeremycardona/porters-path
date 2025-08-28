@@ -1,0 +1,161 @@
+---
+layout: default
+title: "Learning Roadmaps"
+description: "Structured learning paths that guide you through technologies and concepts. Explorer Porter's favorite way to tackle new domains."
+permalink: /collections/roadmaps/
+collection: roadmaps
+---
+
+<div class="hero bg-gradient-to-br from-secondary/20 to-accent/20 py-12">
+  <div class="hero-content text-center">
+    <div class="max-w-4xl">
+      <div class="flex items-center justify-center gap-3 mb-4">
+        <span class="text-4xl">🗺️</span>
+        <h1 class="text-5xl font-bold text-secondary [text-shadow:0_0_20px_currentColor]">
+          {{ page.title }}
+        </h1>
+      </div>
+      <p class="text-xl text-base-content/80 mb-6">{{ page.description }}</p>
+      <div class="badge badge-secondary badge-lg">Explorer Porter</div>
+    </div>
+  </div>
+</div>
+
+<div class="container mx-auto px-4 py-8">
+  {% assign main_roadmaps = site.roadmaps | where_exp: "item", "item.name == 'index'" %}
+  <!-- Collection Stats -->
+  <div class="stats stats-horizontal shadow mb-8 mx-auto">
+    <div class="stat">
+      <div class="stat-title">Learning Paths</div>
+      <div class="stat-value text-secondary">{{ main_roadmaps.size }}</div>
+      <div class="stat-desc">Structured journeys</div>
+    </div>
+    <div class="stat">
+      <div class="stat-title">Skill Areas</div>
+      <div class="stat-value text-accent">{{ main_roadmaps.size }}</div>
+      <div class="stat-desc">Technology domains</div>
+    </div>
+  </div>
+
+  {% if main_roadmaps.size > 0 %}
+    <!-- Roadmaps Grid -->
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+      {% for roadmap in main_roadmaps reversed %}
+        <div class="card bg-base-100 shadow-xl border border-secondary/20 hover:shadow-2xl transition-all">
+          <div class="card-body p-6">
+            <div class="flex items-start justify-between mb-4">
+              <h2 class="card-title text-xl leading-tight">
+                <a href="{{ roadmap.url | relative_url }}" class="link link-hover text-secondary">
+                  {{ roadmap.title }}
+                </a>
+              </h2>
+              {% if roadmap.estimated_time %}
+                <div class="badge badge-secondary badge-outline">{{ roadmap.estimated_time }}</div>
+              {% endif %}
+            </div>
+            
+            {% if roadmap.excerpt %}
+              <p class="text-base-content/70 mb-4">
+                {{ roadmap.excerpt | strip_html | truncatewords: 25 }}
+              </p>
+            {% endif %}
+            
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6">
+              {% if roadmap.skill_level %}
+                <div class="flex items-center gap-2">
+                  <svg class="w-4 h-4 text-secondary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+                  </svg>
+                  <span class="text-sm">{{ roadmap.skill_level | capitalize }} Level</span>
+                </div>
+              {% endif %}
+              {% if roadmap.steps %}
+                <div class="flex items-center gap-2">
+                  <svg class="w-4 h-4 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/>
+                  </svg>
+                  <span class="text-sm">{{ roadmap.steps | size }} Steps</span>
+                </div>
+              {% endif %}
+            </div>
+            
+            {% if roadmap.technologies %}
+              <div class="mb-4">
+                <p class="text-xs text-base-content/60 mb-2">Technologies:</p>
+                <div class="flex flex-wrap gap-1">
+                  {% for tech in roadmap.technologies limit:4 %}
+                    <div class="badge badge-outline badge-xs">{{ tech }}</div>
+                  {% endfor %}
+                  {% if roadmap.technologies.size > 4 %}
+                    <div class="badge badge-outline badge-xs">+{{ roadmap.technologies.size | minus: 4 }} more</div>
+                  {% endif %}
+                </div>
+              </div>
+            {% endif %}
+            
+            <div class="flex items-center justify-between text-xs text-base-content/60 mb-4">
+              {% if roadmap.date %}
+                <span>Updated {{ roadmap.date | date: "%b %Y" }}</span>
+              {% endif %}
+              {% if roadmap.porter_voice %}
+                <div class="badge badge-secondary badge-xs">{{ roadmap.porter_voice | capitalize }} Porter</div>
+              {% endif %}
+            </div>
+            
+            <div class="card-actions justify-end">
+              <a href="{{ roadmap.url | relative_url }}" class="btn btn-secondary btn-sm">
+                Start Journey
+                <svg class="w-3 h-3 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                </svg>
+              </a>
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  {% else %}
+    <!-- Empty State -->
+    <div class="text-center py-16">
+      <div class="mb-8">
+        <span class="text-8xl opacity-40">🗺️</span>
+      </div>
+      <h3 class="text-2xl font-bold mb-4">No Roadmaps Yet</h3>
+      <p class="text-base-content/70 mb-8 max-w-md mx-auto">
+        Explorer Porter is busy mapping out amazing learning journeys. Check back soon for structured paths through new technologies!
+      </p>
+      <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <a href="/collections/" class="btn btn-secondary">
+          <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/>
+          </svg>
+          Browse All Collections
+        </a>
+        <a href="/posts/" class="btn btn-outline">
+          <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z"/>
+          </svg>
+          View Blog Posts
+        </a>
+      </div>
+    </div>
+  {% endif %}
+  
+  <!-- Porter Community Message -->
+  <div class="mt-16">
+    <div class="card bg-gradient-to-br from-secondary/10 to-accent/10 shadow-xl border border-secondary/30">
+      <div class="card-body text-center p-8">
+        <div class="flex items-center justify-center gap-2 mb-4">
+          <span class="text-2xl">🍄</span>
+          <h3 class="text-xl font-bold text-secondary">Explorer Porter's Perspective</h3>
+        </div>
+        <p class="text-base-content/80 max-w-2xl mx-auto">
+          "Learning new tech can feel overwhelming, but having a clear roadmap makes all the difference. These paths are based on real experience - what actually worked, what to skip, and where to focus your energy for maximum growth."
+        </p>
+        <p class="text-sm text-base-content/60 mt-3 italic">
+          - Explorer Porter
+        </p>
+      </div>
+    </div>
+  </div>
+</div>

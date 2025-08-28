@@ -35,14 +35,14 @@ author: Your Name
 The easiest way to customize colors is by changing the DaisyUI theme. Edit `_layouts/default.html`:
 
 ```html
-<!-- Change from cyberpunk to another theme -->
+<!-- Change from fantasy to another theme -->
 <html lang="{{ page.lang | default: site.lang | default: "en" }}" data-theme="dark">
 ```
 
 **Available themes:**
 - `light` - Clean light theme
 - `dark` - Modern dark theme  
-- `cyberpunk` - Neon cyberpunk theme
+- `fantasy` - Neon fantasy theme
 - `cupcake` - Soft pastel theme
 - `emerald` - Green accent theme
 - `corporate` - Professional theme
@@ -136,7 +136,7 @@ module.exports = {
   },
   plugins: [require("daisyui")],
   daisyui: {
-    themes: ["light", "dark", "cyberpunk"]
+    themes: ["light", "dark", "fantasy"]
   }
 }
 ```
@@ -427,7 +427,7 @@ Create a theme switcher component:
   <ul tabindex="0" class="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52">
     <li><a onclick="setTheme('light')">Light</a></li>
     <li><a onclick="setTheme('dark')">Dark</a></li>
-    <li><a onclick="setTheme('cyberpunk')">Cyberpunk</a></li>
+    <li><a onclick="setTheme('fantasy')">fantasy</a></li>
   </ul>
 </div>
 
@@ -438,7 +438,7 @@ function setTheme(theme) {
 }
 
 // Load saved theme
-const savedTheme = localStorage.getItem('theme') || 'cyberpunk';
+const savedTheme = localStorage.getItem('theme') || 'fantasy';
 setTheme(savedTheme);
 </script>
 ```
@@ -536,7 +536,7 @@ module.exports = {
   },
   plugins: [require("daisyui")],
   daisyui: {
-    themes: ["light", "dark", "cyberpunk"],
+    themes: ["light", "dark", "fantasy"],
     // Reduce CSS size by only including used themes
     logs: false,
   }

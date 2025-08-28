@@ -1,0 +1,182 @@
+---
+layout: default
+title: "How-To Guides"
+description: "Practical implementation guides based on real-world experience. Includes the parts usually left out of other tutorials."
+permalink: /collections/guides/
+collection: guides
+---
+
+<div class="hero bg-gradient-to-br from-info/20 to-success/20 py-12">
+  <div class="hero-content text-center">
+    <div class="max-w-4xl">
+      <div class="flex items-center justify-center gap-3 mb-4">
+        <span class="text-4xl">🔧</span>
+        <h1 class="text-5xl font-bold text-info [text-shadow:0_0_20px_currentColor]">
+          {{ page.title }}
+        </h1>
+      </div>
+      <p class="text-xl text-base-content/80 mb-6">{{ page.description }}</p>
+      <div class="badge badge-info badge-lg">Senior Porter</div>
+    </div>
+  </div>
+</div>
+
+<div class="container mx-auto px-4 py-8">
+  <!-- Collection Stats -->
+  <div class="stats stats-horizontal shadow mb-8 mx-auto">
+    <div class="stat">
+      <div class="stat-title">Implementation Guides</div>
+      <div class="stat-value text-info">{{ site.guides.size }}</div>
+      <div class="stat-desc">Real-world focused</div>
+    </div>
+    <div class="stat">
+      <div class="stat-title">Experience Based</div>
+      <div class="stat-value text-success">100%</div>
+      <div class="stat-desc">Tested in practice</div>
+    </div>
+  </div>
+
+  {% if site.guides.size > 0 %}
+    <!-- Guides List -->
+    <div class="space-y-6">
+      {% for guide in site.guides reversed %}
+        <div class="card bg-base-100 shadow-xl border border-info/20 hover:shadow-2xl transition-all">
+          <div class="card-body p-6">
+            <div class="flex flex-col lg:flex-row lg:items-start gap-6">
+              <div class="flex-1">
+                <div class="flex items-start justify-between mb-4">
+                  <h2 class="card-title text-xl leading-tight">
+                    <a href="{{ guide.url | relative_url }}" class="link link-hover text-info">
+                      {{ guide.title }}
+                    </a>
+                  </h2>
+                  {% if guide.complexity %}
+                    <div class="badge badge-info badge-outline">{{ guide.complexity }}</div>
+                  {% endif %}
+                </div>
+                
+                {% if guide.excerpt %}
+                  <p class="text-base-content/70 mb-4">
+                    {{ guide.excerpt | strip_html | truncatewords: 30 }}
+                  </p>
+                {% endif %}
+                
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-4">
+                  {% if guide.estimated_time %}
+                    <div class="flex items-center gap-2">
+                      <svg class="w-4 h-4 text-info" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                      </svg>
+                      <span class="text-sm">{{ guide.estimated_time }}</span>
+                    </div>
+                  {% endif %}
+                  {% if guide.prerequisites %}
+                    <div class="flex items-center gap-2">
+                      <svg class="w-4 h-4 text-warning" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                      </svg>
+                      <span class="text-sm">{{ guide.prerequisites | size }} Prerequisites</span>
+                    </div>
+                  {% endif %}
+                  {% if guide.tools %}
+                    <div class="flex items-center gap-2">
+                      <svg class="w-4 h-4 text-success" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"/>
+                      </svg>
+                      <span class="text-sm">{{ guide.tools | size }} Tools</span>
+                    </div>
+                  {% endif %}
+                </div>
+              </div>
+              
+              <div class="lg:w-64 space-y-4">
+                {% if guide.technologies %}
+                  <div>
+                    <p class="text-xs text-base-content/60 mb-2">Technologies:</p>
+                    <div class="flex flex-wrap gap-1">
+                      {% for tech in guide.technologies limit:3 %}
+                        <div class="badge badge-outline badge-xs">{{ tech }}</div>
+                      {% endfor %}
+                      {% if guide.technologies.size > 3 %}
+                        <div class="badge badge-outline badge-xs">+{{ guide.technologies.size | minus: 3 }}</div>
+                      {% endif %}
+                    </div>
+                  </div>
+                {% endif %}
+                
+                <div class="flex items-center justify-between text-xs text-base-content/60">
+                  {% if guide.date %}
+                    <span>{{ guide.date | date: "%b %d, %Y" }}</span>
+                  {% endif %}
+                  {% if guide.porter_voice %}
+                    <div class="badge badge-info badge-xs">{{ guide.porter_voice | capitalize }} Porter</div>
+                  {% endif %}
+                </div>
+                
+                <div class="flex flex-col gap-2">
+                  <a href="{{ guide.url | relative_url }}" class="btn btn-info btn-sm">
+                    <svg class="w-3 h-3 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"/>
+                    </svg>
+                    Start Guide
+                  </a>
+                  {% if guide.github_repo %}
+                    <a href="{{ guide.github_repo }}" target="_blank" rel="noopener" class="btn btn-outline btn-xs">
+                      <svg class="w-3 h-3 mr-1" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                      </svg>
+                      Code
+                    </a>
+                  {% endif %}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  {% else %}
+    <!-- Empty State -->
+    <div class="text-center py-16">
+      <div class="mb-8">
+        <span class="text-8xl opacity-40">🔧</span>
+      </div>
+      <h3 class="text-2xl font-bold mb-4">No Guides Yet</h3>
+      <p class="text-base-content/70 mb-8 max-w-md mx-auto">
+        Senior Porter is busy crafting detailed implementation guides based on real project experience. Check back soon for practical how-to content!
+      </p>
+      <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <a href="/collections/" class="btn btn-info">
+          <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/>
+          </svg>
+          Browse All Collections
+        </a>
+        <a href="/posts/" class="btn btn-outline">
+          <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z"/>
+          </svg>
+          View Blog Posts
+        </a>
+      </div>
+    </div>
+  {% endif %}
+  
+  <!-- Porter Community Message -->
+  <div class="mt-16">
+    <div class="card bg-gradient-to-br from-info/10 to-success/10 shadow-xl border border-info/30">
+      <div class="card-body text-center p-8">
+        <div class="flex items-center justify-center gap-2 mb-4">
+          <span class="text-2xl">🍄</span>
+          <h3 class="text-xl font-bold text-info">Senior Porter's Wisdom</h3>
+        </div>
+        <p class="text-base-content/80 max-w-2xl mx-auto">
+          "The difference between a tutorial and a guide is experience. These guides include the gotchas, the edge cases, and the real-world considerations that only come from actually building things in production."
+        </p>
+        <p class="text-sm text-base-content/60 mt-3 italic">
+          - Senior Porter
+        </p>
+      </div>
+    </div>
+  </div>
+</div>

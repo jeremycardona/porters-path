@@ -12,7 +12,7 @@ Welcome to **Sour Theme**! 🍋 This comprehensive guide will walk you through s
 
 ## 🚀 Quick Overview
 
-**Sour Theme** is a minimal, cyberpunk-inspired Jekyll theme designed for developers and content creators who want:
+**Sour Theme** is a minimal, fantasy-inspired Jekyll theme designed for developers and content creators who want:
 
 ### ✨ Core Technologies
 - **Jekyll 4.4.1** - Lightning-fast static site generator
@@ -21,7 +21,7 @@ Welcome to **Sour Theme**! 🍋 This comprehensive guide will walk you through s
 - **Modern Plugins** - SEO optimization, analytics, table of contents, and more
 
 ### 🎯 Key Features
-- **Multi-theme Support** - Light, dark, cyberpunk, and 20+ other themes
+- **Multi-theme Support** - Light, dark, fantasy, and 20+ other themes
 - **Responsive Design** - Mobile-first approach that looks great on any device
 - **SEO Optimized** - Built-in meta tags, structured data, and social media ready
 - **Developer Friendly** - Hot reloading, easy customization, GitHub Actions workflow
@@ -91,7 +91,7 @@ The template supports multiple DaisyUI themes. Edit `_layouts/default.html`:
 <html lang="en" data-theme="dark">  
 ```
 
-Available themes: `light`, `dark`, `cyberpunk`, `cupcake`, `emerald`, `corporate`, `retro`
+Available themes: `light`, `dark`, `fantasy`, `cupcake`, `emerald`, `corporate`, `retro`
 
 ## Step 4: Remove Template Content
 

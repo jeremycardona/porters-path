@@ -1,0 +1,58 @@
+<svg width="400" height="150" viewBox="0 0 400 150" xmlns="http://www.w3.org/2000/svg">
+  <!-- Winding path -->
+  <path d="M20 100 Q80 80, 140 95 T260 85 T380 90" 
+        stroke="#8B7355" 
+        stroke-width="3" 
+        fill="none" 
+        stroke-linecap="round"/>
+  
+  <!-- Small dots along the path for texture -->
+  <circle cx="50" cy="92" r="1" fill="#A0956B" opacity="0.6"/>
+  <circle cx="110" cy="88" r="1" fill="#A0956B" opacity="0.6"/>
+  <circle cx="200" cy="89" r="1" fill="#A0956B" opacity="0.6"/>
+  <circle cx="300" cy="87" r="1" fill="#A0956B" opacity="0.6"/>
+  
+  <!-- Group of main elements scaled up -->
+  <g transform="scale(1.3) translate(-30,-20)">
+    <!-- Mushrooms -->
+    <g transform="translate(70, 85)">
+      <ellipse cx="0" cy="0" rx="8" ry="4" fill="#D2B48C"/>
+      <rect x="-1" y="0" width="2" height="8" fill="#8B7355"/>
+    </g>
+  
+    <g transform="translate(180, 86)">
+      <ellipse cx="0" cy="0" rx="12" ry="6" fill="#DEB887"/>
+      <rect x="-1.5" y="0" width="3" height="12" fill="#8B7355"/>
+    </g>
+  
+    <g transform="translate(280, 70)">
+      <ellipse cx="0" cy="0" rx="15" ry="8" fill="#D2B48C"/>
+      <rect x="-2" y="0" width="4" height="15" fill="#8B7355"/>
+    </g>
+  
+    <g transform="translate(320, 80)">
+      <ellipse cx="0" cy="0" rx="9" ry="5" fill="#DEB887"/>
+      <rect x="-1" y="0" width="2" height="10" fill="#8B7355"/>
+    </g>
+    
+    <!-- Text -->
+    <text x="200" y="40" 
+          font-family="system-ui, -apple-system, sans-serif" 
+          font-size="28" 
+          font-weight="600" 
+          text-anchor="middle" 
+          fill="#5D4E37">
+      Porters' Path
+    </text>
+    
+    <!-- Subtle tagline -->
+    <text x="200" y="60" 
+          font-family="system-ui, -apple-system, sans-serif" 
+          font-size="12" 
+          text-anchor="middle" 
+          fill="#8B7355" 
+          opacity="0.8">
+      Growing together through code
+    </text>
+  </g>
+</svg>

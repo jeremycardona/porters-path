@@ -1,12 +1,12 @@
 @import "tailwindcss";
 @plugin "daisyui" {
-  themes: dark, cyberpunk --default;
+  themes: dark, fantasy --default;
   logs: true;
 };
 
-/* DaisyUI cyberpunk theme enhancements */
+/* DaisyUI fantasy theme enhancements */
 :root {
-  /* Custom properties for additional cyberpunk effects */
+  /* Custom properties for additional fantasy effects */
   --glow-primary: 0 0 20px hsl(var(--p));
   --glow-secondary: 0 0 20px hsl(var(--s));
 }
@@ -126,3 +126,32 @@
   @apply text-xs;
   color: hsl(var(--bc) / 0.6);
 }
+
+/* Rotating taglines animation */
+.tagline-rotate {
+  position: relative;
+}
+
+.tagline-rotate .tagline {
+  @apply absolute inset-0 flex items-center justify-center;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.8s ease-in-out, transform 0.8s ease-in-out;
+}
+
+.tagline-rotate .tagline.active {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Auto-rotate taglines every 4 seconds */
+@keyframes tagline-cycle {
+  0%, 20% { opacity: 1; transform: translateY(0); }
+  25%, 95% { opacity: 0; transform: translateY(-20px); }
+  100% { opacity: 0; transform: translateY(20px); }
+}
+
+.tagline-rotate .tagline:nth-child(1) { animation: tagline-cycle 16s infinite 0s; }
+.tagline-rotate .tagline:nth-child(2) { animation: tagline-cycle 16s infinite 4s; }
+.tagline-rotate .tagline:nth-child(3) { animation: tagline-cycle 16s infinite 8s; }
+.tagline-rotate .tagline:nth-child(4) { animation: tagline-cycle 16s infinite 12s; }

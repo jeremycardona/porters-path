@@ -1,0 +1,213 @@
+---
+layout: default
+---
+
+<div class="hero bg-gradient-to-br from-primary/20 to-secondary/20 py-12">
+  <div class="hero-content text-center">
+    <div class="max-w-4xl">
+      <div class="flex items-center justify-center gap-3 mb-4">
+        <span class="text-3xl">📚</span>
+        <div class="badge badge-primary">Tutorial</div>
+      </div>
+      <h1 class="text-4xl md:text-5xl font-bold mb-6 text-primary [text-shadow:0_0_20px_currentColor]">
+        {{ page.title }}
+      </h1>
+      {% if page.excerpt %}
+        <p class="text-xl text-base-content/80 max-w-2xl mx-auto mb-6">
+          {{ page.excerpt | strip_html }}
+        </p>
+      {% endif %}
+      
+      <div class="flex flex-wrap justify-center gap-3">
+        {% if page.porter_voice %}
+          <div class="badge badge-primary badge-lg">{{ page.porter_voice | capitalize }} Porter</div>
+        {% endif %}
+        {% if page.difficulty %}
+          <div class="badge badge-secondary badge-lg">{{ page.difficulty | capitalize }}</div>
+        {% endif %}
+        {% if page.estimated_time %}
+          <div class="badge badge-accent badge-lg">{{ page.estimated_time }}</div>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container mx-auto px-4 py-8">
+  <div class="grid grid-cols-1 lg:grid-cols-4 gap-8">
+    <!-- Main Content -->
+    <div class="lg:col-span-3">
+      <!-- Tutorial Meta Info -->
+      {% if page.prerequisites or page.tools or page.technologies %}
+        <div class="card bg-base-100 shadow-xl border border-primary/30 mb-8">
+          <div class="card-body p-6">
+            <h2 class="card-title text-primary mb-4">Before We Start</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+              {% if page.prerequisites %}
+                <div>
+                  <h3 class="font-semibold text-sm mb-2">Prerequisites</h3>
+                  <ul class="space-y-1">
+                    {% for prereq in page.prerequisites %}
+                      <li class="text-sm flex items-center gap-2">
+                        <svg class="w-3 h-3 text-success" fill="currentColor" viewBox="0 0 20 20">
+                          <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                        </svg>
+                        {{ prereq }}
+                      </li>
+                    {% endfor %}
+                  </ul>
+                </div>
+              {% endif %}
+              
+              {% if page.tools %}
+                <div>
+                  <h3 class="font-semibold text-sm mb-2">Tools Needed</h3>
+                  <ul class="space-y-1">
+                    {% for tool in page.tools %}
+                      <li class="text-sm flex items-center gap-2">
+                        <svg class="w-3 h-3 text-info" fill="currentColor" viewBox="0 0 20 20">
+                          <path fill-rule="evenodd" d="M12.316 3.051a1 1 0 01.633 1.265l-4 12a1 1 0 11-1.898-.632l4-12a1 1 0 011.265-.633zM5.707 6.293a1 1 0 010 1.414L3.414 10l2.293 2.293a1 1 0 11-1.414 1.414l-3-3a1 1 0 010-1.414l3-3a1 1 0 011.414 0zm8.586 0a1 1 0 011.414 0l3 3a1 1 0 010 1.414l-3 3a1 1 0 11-1.414-1.414L16.586 10l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd"/>
+                        </svg>
+                        {{ tool }}
+                      </li>
+                    {% endfor %}
+                  </ul>
+                </div>
+              {% endif %}
+              
+              {% if page.technologies %}
+                <div>
+                  <h3 class="font-semibold text-sm mb-2">Technologies</h3>
+                  <div class="flex flex-wrap gap-1">
+                    {% for tech in page.technologies %}
+                      <div class="badge badge-outline badge-sm">{{ tech }}</div>
+                    {% endfor %}
+                  </div>
+                </div>
+              {% endif %}
+            </div>
+          </div>
+        </div>
+      {% endif %}
+      
+      <!-- Tutorial Content -->
+      <div class="card bg-base-100 shadow-xl border border-primary/30">
+        <div class="card-body p-8">
+          <div class="post-content">
+            {{ content }}
+          </div>
+        </div>
+      </div>
+      
+      <!-- Navigation -->
+      <div class="flex justify-between items-center mt-8">
+        <a href="/collections/tutorials/" class="btn btn-outline">
+          <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/>
+          </svg>
+          Back to Tutorials
+        </a>
+        
+        {% if page.next_tutorial %}
+          <a href="{{ page.next_tutorial }}" class="btn btn-primary">
+            Next Tutorial
+            <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7-7 7M5 12h14"/>
+            </svg>
+          </a>
+        {% endif %}
+      </div>
+    </div>
+    
+    <!-- Sidebar -->
+    <div class="lg:col-span-1 space-y-6">
+      <!-- Tutorial Info -->
+      <div class="card bg-base-200 shadow-xl border border-primary/30">
+        <div class="card-body p-6">
+          <h3 class="card-title text-primary text-lg mb-4">Tutorial Info</h3>
+          <div class="space-y-3">
+            {% if page.date %}
+              <div class="flex items-center gap-2 text-sm">
+                <svg class="w-4 h-4 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+                </svg>
+                {{ page.date | date: "%B %d, %Y" }}
+              </div>
+            {% endif %}
+            
+            {% if page.estimated_time %}
+              <div class="flex items-center gap-2 text-sm">
+                <svg class="w-4 h-4 text-secondary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                </svg>
+                {{ page.estimated_time }}
+              </div>
+            {% endif %}
+            
+            {% if page.difficulty %}
+              <div class="flex items-center gap-2 text-sm">
+                <svg class="w-4 h-4 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+                </svg>
+                {{ page.difficulty | capitalize }} Level
+              </div>
+            {% endif %}
+            
+            {% if page.porter_voice %}
+              <div class="flex items-center gap-2 text-sm">
+                <span class="text-lg">🍄</span>
+                {{ page.porter_voice | capitalize }} Porter
+              </div>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+      
+      <!-- Related Tutorials -->
+      {% assign related_tutorials = site.tutorials | where_exp: "item", "item.url != page.url" | limit: 3 %}
+      {% if related_tutorials.size > 0 %}
+        <div class="card bg-base-200 shadow-xl border border-primary/30">
+          <div class="card-body p-6">
+            <h3 class="card-title text-primary text-lg mb-4">More Tutorials</h3>
+            <div class="space-y-3">
+              {% for tutorial in related_tutorials %}
+                <div class="p-3 bg-base-100 rounded-lg hover:bg-base-300 transition-colors">
+                  <h4 class="font-semibold text-sm mb-1">
+                    <a href="{{ tutorial.url | relative_url }}" class="link link-hover">{{ tutorial.title }}</a>
+                  </h4>
+                  {% if tutorial.difficulty %}
+                    <div class="badge badge-outline badge-xs">{{ tutorial.difficulty }}</div>
+                  {% endif %}
+                </div>
+              {% endfor %}
+            </div>
+            <div class="mt-4">
+              <a href="/collections/tutorials/" class="btn btn-outline btn-sm w-full">View All Tutorials</a>
+            </div>
+          </div>
+        </div>
+      {% endif %}
+      
+      <!-- Share -->
+      <div class="card bg-base-200 shadow-xl border border-primary/30">
+        <div class="card-body p-6">
+          <h3 class="card-title text-primary text-lg mb-4">Share Tutorial</h3>
+          <div class="flex gap-2">
+            <a href="https://twitter.com/intent/tweet?url={{ page.url | absolute_url }}&text={{ page.title | url_encode }}" 
+               target="_blank" rel="noopener" class="btn btn-square btn-sm">
+              <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045-4.091-.205-7.719-2.165-10.148-5.144-1.29 2.213-.669 5.108 1.523 6.574-.806-.026-1.566-.247-2.229-.616-.054 2.281 1.581 4.415 3.949 4.89-.693.188-1.452.232-2.224.084.626 1.956 2.444 3.379 4.6 3.419-2.07 1.623-4.678 2.348-7.29 2.04 2.179 1.397 4.768 2.212 7.548 2.212 9.142 0 14.307-7.721 13.995-14.646.962-.695 1.797-1.562 2.457-2.549z"/>
+              </svg>
+            </a>
+            <button onclick="navigator.clipboard.writeText('{{ page.url | absolute_url }}')" 
+                    class="btn btn-square btn-sm" title="Copy link">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"/>
+              </svg>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,135 @@
+---
+layout: default
+title: "Tutorials"
+description: "Step-by-step learning guides crafted with the Porter community's teaching approach, from beginner-friendly introductions to advanced deep-dives."
+permalink: /collections/tutorials/
+collection: tutorials
+---
+
+<div class="hero bg-gradient-to-br from-primary/20 to-secondary/20 py-12">
+  <div class="hero-content text-center">
+    <div class="max-w-4xl">
+      <div class="flex items-center justify-center gap-3 mb-4">
+        <span class="text-4xl">📚</span>
+        <h1 class="text-5xl font-bold text-primary [text-shadow:0_0_20px_currentColor]">
+          {{ page.title }}
+        </h1>
+      </div>
+      <p class="text-xl text-base-content/80 mb-6">{{ page.description }}</p>
+      <div class="badge badge-primary badge-lg">Junior + Senior Porter</div>
+    </div>
+  </div>
+</div>
+
+<div class="container mx-auto px-4 py-8">
+  <!-- Collection Stats -->
+  <div class="stats stats-horizontal shadow mb-8 mx-auto">
+    <div class="stat">
+      <div class="stat-title">Total Tutorials</div>
+      <div class="stat-value text-primary">{{ site.tutorials.size }}</div>
+      <div class="stat-desc">Community-created content</div>
+    </div>
+    <div class="stat">
+      <div class="stat-title">Learning Paths</div>
+      <div class="stat-value text-secondary">{{ site.tutorials.size | divided_by: 3 | plus: 1 }}</div>
+      <div class="stat-desc">Organized by topic</div>
+    </div>
+  </div>
+
+  {% if site.tutorials.size > 0 %}
+    <!-- Tutorials Grid -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      {% for tutorial in site.tutorials reversed %}
+        <div class="card bg-base-100 shadow-xl border border-primary/20 hover:shadow-2xl transition-all hover:scale-105">
+          <div class="card-body p-6">
+            <div class="flex items-start justify-between mb-3">
+              <h2 class="card-title text-lg leading-tight">
+                <a href="{{ tutorial.url | relative_url }}" class="link link-hover text-primary">
+                  {{ tutorial.title }}
+                </a>
+              </h2>
+              {% if tutorial.difficulty %}
+                <div class="badge badge-outline badge-sm">{{ tutorial.difficulty }}</div>
+              {% endif %}
+            </div>
+            
+            {% if tutorial.excerpt %}
+              <p class="text-sm text-base-content/70 mb-4 line-clamp-3">
+                {{ tutorial.excerpt | strip_html | truncatewords: 20 }}
+              </p>
+            {% endif %}
+            
+            <div class="flex items-center justify-between text-xs text-base-content/60 mb-4">
+              {% if tutorial.date %}
+                <span>{{ tutorial.date | date: "%b %d, %Y" }}</span>
+              {% endif %}
+              {% if tutorial.porter_voice %}
+                <div class="badge badge-primary badge-xs">{{ tutorial.porter_voice | capitalize }} Porter</div>
+              {% endif %}
+            </div>
+            
+            {% if tutorial.tags %}
+              <div class="flex flex-wrap gap-1 mb-4">
+                {% for tag in tutorial.tags limit:3 %}
+                  <div class="badge badge-outline badge-xs">{{ tag }}</div>
+                {% endfor %}
+              </div>
+            {% endif %}
+            
+            <div class="card-actions justify-end">
+              <a href="{{ tutorial.url | relative_url }}" class="btn btn-primary btn-sm">
+                Read Tutorial
+                <svg class="w-3 h-3 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                </svg>
+              </a>
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  {% else %}
+    <!-- Empty State -->
+    <div class="text-center py-16">
+      <div class="mb-8">
+        <span class="text-8xl opacity-40">📚</span>
+      </div>
+      <h3 class="text-2xl font-bold mb-4">No Tutorials Yet</h3>
+      <p class="text-base-content/70 mb-8 max-w-md mx-auto">
+        The Porters are busy preparing amazing tutorials for you. Check back soon for step-by-step learning guides!
+      </p>
+      <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <a href="/collections/" class="btn btn-primary">
+          <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/>
+          </svg>
+          Browse All Collections
+        </a>
+        <a href="/posts/" class="btn btn-outline">
+          <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z"/>
+          </svg>
+          View Blog Posts
+        </a>
+      </div>
+    </div>
+  {% endif %}
+  
+  <!-- Porter Community Message -->
+  <div class="mt-16">
+    <div class="card bg-gradient-to-br from-primary/10 to-secondary/10 shadow-xl border border-primary/30">
+      <div class="card-body text-center p-8">
+        <div class="flex items-center justify-center gap-2 mb-4">
+          <span class="text-2xl">🍄</span>
+          <h3 class="text-xl font-bold text-primary">From the Porter Community</h3>
+        </div>
+        <p class="text-base-content/80 max-w-2xl mx-auto">
+          "Our tutorials focus on the learning journey, not just the destination. We include the struggles, the 'aha!' moments, and the practical tips that make the difference between knowing something and truly understanding it."
+        </p>
+        <p class="text-sm text-base-content/60 mt-3 italic">
+          - Junior & Senior Porter
+        </p>
+      </div>
+    </div>
+  </div>
+</div>

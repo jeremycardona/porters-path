@@ -1,0 +1,178 @@
+---
+layout: default
+title: "Content Collections"
+description: "Explore our organized content collections - from tutorials and roadmaps to tips and guides, all crafted with the Porter community's diverse perspectives."
+permalink: /collections/
+---
+
+<div class="hero bg-gradient-to-br from-primary/20 to-secondary/20 py-16">
+  <div class="hero-content text-center">
+    <div class="max-w-4xl">
+      <h1 class="text-5xl md:text-6xl font-bold mb-6 text-primary [text-shadow:0_0_20px_currentColor]">
+        {{ page.title }}
+      </h1>
+      <p class="text-xl text-base-content/80 max-w-2xl mx-auto">
+        {{ page.description }}
+      </p>
+      <div class="flex items-center justify-center gap-2 mt-6">
+        <span class="text-2xl">🍄</span>
+        <p class="text-lg text-base-content/70">
+          Organized by the Porter community for continuous growth
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container mx-auto px-4 py-12">
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8 max-w-6xl mx-auto">
+    
+    <!-- Tutorials Collection -->
+    <div class="card bg-base-100 shadow-xl border border-primary/30 hover:shadow-2xl transition-shadow">
+      <div class="card-body p-8">
+        <div class="flex items-center gap-3 mb-4">
+          <div class="text-3xl">📚</div>
+          <h2 class="card-title text-2xl text-primary">Tutorials</h2>
+        </div>
+        <p class="text-base-content/80 mb-6">
+          Step-by-step learning guides crafted with the Porter community's teaching approach. From beginner-friendly introductions to advanced deep-dives.
+        </p>
+        <div class="flex items-center justify-between mb-6">
+          <div class="stats stats-horizontal stats-sm">
+            <div class="stat p-2">
+              <div class="stat-title text-xs">Total</div>
+              <div class="stat-value text-lg text-primary">{{ site.tutorials.size }}</div>
+            </div>
+          </div>
+          <div class="badge badge-primary badge-lg">
+            Junior + Senior Porter
+          </div>
+        </div>
+        <div class="card-actions justify-end">
+          <a href="/collections/tutorials/" class="btn btn-primary">
+            <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.746 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/>
+            </svg>
+            Explore Tutorials
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Roadmaps Collection -->
+    <div class="card bg-base-100 shadow-xl border border-secondary/30 hover:shadow-2xl transition-shadow">
+      <div class="card-body p-8">
+        <div class="flex items-center gap-3 mb-4">
+          <div class="text-3xl">🗺️</div>
+          <h2 class="card-title text-2xl text-secondary">Learning Roadmaps</h2>
+        </div>
+        <p class="text-base-content/80 mb-6">
+          Structured learning paths that guide you through technologies and concepts. Explorer Porter's favorite way to tackle new domains.
+        </p>
+        <div class="flex items-center justify-between mb-6">
+          <div class="stats stats-horizontal stats-sm">
+            <div class="stat p-2">
+              <div class="stat-title text-xs">Total</div>
+              <div class="stat-value text-lg text-secondary">{{ site.roadmaps.size }}</div>
+            </div>
+          </div>
+          <div class="badge badge-secondary badge-lg">
+            Explorer Porter
+          </div>
+        </div>
+        <div class="card-actions justify-end">
+          <a href="/collections/roadmaps/" class="btn btn-secondary">
+            <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7"/>
+            </svg>
+            View Roadmaps
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Tips & Tricks Collection -->
+    <div class="card bg-base-100 shadow-xl border border-accent/30 hover:shadow-2xl transition-shadow">
+      <div class="card-body p-8">
+        <div class="flex items-center gap-3 mb-4">
+          <div class="text-3xl">💡</div>
+          <h2 class="card-title text-2xl text-accent">Tips & Tricks</h2>
+        </div>
+        <p class="text-base-content/80 mb-6">
+          Quick insights and practical tips discovered during our coding adventures. Perfect for those "aha!" moments and productivity boosts.
+        </p>
+        <div class="flex items-center justify-between mb-6">
+          <div class="stats stats-horizontal stats-sm">
+            <div class="stat p-2">
+              <div class="stat-title text-xs">Total</div>
+              <div class="stat-value text-lg text-accent">{{ site.tips.size }}</div>
+            </div>
+          </div>
+          <div class="badge badge-accent badge-lg">
+            All Porters
+          </div>
+        </div>
+        <div class="card-actions justify-end">
+          <a href="/collections/tips/" class="btn btn-accent">
+            <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+            </svg>
+            Browse Tips
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- How-To Guides Collection -->
+    <div class="card bg-base-100 shadow-xl border border-info/30 hover:shadow-2xl transition-shadow">
+      <div class="card-body p-8">
+        <div class="flex items-center gap-3 mb-4">
+          <div class="text-3xl">🔧</div>
+          <h2 class="card-title text-2xl text-info">How-To Guides</h2>
+        </div>
+        <p class="text-base-content/80 mb-6">
+          Practical implementation guides based on real-world experience. Includes the parts usually left out of other tutorials.
+        </p>
+        <div class="flex items-center justify-between mb-6">
+          <div class="stats stats-horizontal stats-sm">
+            <div class="stat p-2">
+              <div class="stat-title text-xs">Total</div>
+              <div class="stat-value text-lg text-info">{{ site.guides.size }}</div>
+            </div>
+          </div>
+          <div class="badge badge-info badge-lg">
+            Senior Porter
+          </div>
+        </div>
+        <div class="card-actions justify-end">
+          <a href="/collections/guides/" class="btn btn-info">
+            <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"/>
+            </svg>
+            Read Guides
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Community Message -->
+  <div class="max-w-4xl mx-auto mt-16">
+    <div class="card bg-gradient-to-br from-primary/10 to-secondary/10 shadow-xl border border-primary/30">
+      <div class="card-body text-center p-8">
+        <div class="flex items-center justify-center gap-3 mb-4">
+          <span class="text-3xl">🍄</span>
+          <h3 class="text-2xl font-bold text-primary">Growing Together</h3>
+        </div>
+        <p class="text-lg text-base-content/80 max-w-2xl mx-auto">
+          Each collection represents a different way the Porter community shares knowledge. Whether you're just starting your journey or helping others along theirs, there's always something new to discover and contribute.
+        </p>
+        <div class="flex flex-wrap justify-center gap-4 mt-6">
+          <div class="badge badge-primary badge-lg">Continuous Learning</div>
+          <div class="badge badge-secondary badge-lg">Practical Experience</div>
+          <div class="badge badge-accent badge-lg">Community Driven</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,135 @@
+---
+layout: default
+title: "Tips & Tricks"
+description: "Quick insights and practical tips discovered during our coding adventures. Perfect for those 'aha!' moments and productivity boosts."
+permalink: /collections/tips/
+collection: tips
+---
+
+<div class="hero bg-gradient-to-br from-accent/20 to-warning/20 py-12">
+  <div class="hero-content text-center">
+    <div class="max-w-4xl">
+      <div class="flex items-center justify-center gap-3 mb-4">
+        <span class="text-4xl">💡</span>
+        <h1 class="text-5xl font-bold text-accent [text-shadow:0_0_20px_currentColor]">
+          {{ page.title }}
+        </h1>
+      </div>
+      <p class="text-xl text-base-content/80 mb-6">{{ page.description }}</p>
+      <div class="badge badge-accent badge-lg">All Porters</div>
+    </div>
+  </div>
+</div>
+
+<div class="container mx-auto px-4 py-8">
+  <!-- Collection Stats -->
+  <div class="stats stats-horizontal shadow mb-8 mx-auto">
+    <div class="stat">
+      <div class="stat-title">Quick Tips</div>
+      <div class="stat-value text-accent">{{ site.tips.size }}</div>
+      <div class="stat-desc">Bite-sized insights</div>
+    </div>
+    <div class="stat">
+      <div class="stat-title">Porter Voices</div>
+      <div class="stat-value text-warning">4</div>
+      <div class="stat-desc">Different perspectives</div>
+    </div>
+  </div>
+
+  {% if site.tips.size > 0 %}
+    <!-- Tips Masonry Grid -->
+    <div class="columns-1 md:columns-2 lg:columns-3 gap-6 space-y-6">
+      {% for tip in site.tips reversed %}
+        <div class="break-inside-avoid">
+          <div class="card bg-base-100 shadow-xl border border-accent/20 hover:shadow-2xl transition-all hover:scale-105">
+            <div class="card-body p-5">
+              <div class="flex items-start justify-between mb-3">
+                <h2 class="card-title text-base leading-tight">
+                  <a href="{{ tip.url | relative_url }}" class="link link-hover text-accent">
+                    {{ tip.title }}
+                  </a>
+                </h2>
+                {% if tip.quick_tip %}
+                  <div class="badge badge-warning badge-xs">Quick</div>
+                {% endif %}
+              </div>
+              
+              {% if tip.excerpt %}
+                <p class="text-sm text-base-content/70 mb-4">
+                  {{ tip.excerpt | strip_html | truncatewords: 15 }}
+                </p>
+              {% endif %}
+              
+              <div class="flex items-center justify-between text-xs text-base-content/60 mb-3">
+                {% if tip.date %}
+                  <span>{{ tip.date | date: "%b %d" }}</span>
+                {% endif %}
+                {% if tip.porter_voice %}
+                  <div class="badge badge-accent badge-xs">{{ tip.porter_voice | capitalize }} Porter</div>
+                {% endif %}
+              </div>
+              
+              {% if tip.category %}
+                <div class="mb-3">
+                  <div class="badge badge-outline badge-xs">{{ tip.category }}</div>
+                </div>
+              {% endif %}
+              
+              <div class="card-actions justify-end">
+                <a href="{{ tip.url | relative_url }}" class="btn btn-accent btn-xs">
+                  Read Tip
+                  <svg class="w-3 h-3 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                  </svg>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  {% else %}
+    <!-- Empty State -->
+    <div class="text-center py-16">
+      <div class="mb-8">
+        <span class="text-8xl opacity-40">💡</span>
+      </div>
+      <h3 class="text-2xl font-bold mb-4">No Tips Yet</h3>
+      <p class="text-base-content/70 mb-8 max-w-md mx-auto">
+        The Porters are collecting their best insights and 'aha!' moments to share with you. Check back soon for practical tips and tricks!
+      </p>
+      <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <a href="/collections/" class="btn btn-accent">
+          <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/>
+          </svg>
+          Browse All Collections
+        </a>
+        <a href="/posts/" class="btn btn-outline">
+          <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z"/>
+          </svg>
+          View Blog Posts
+        </a>
+      </div>
+    </div>
+  {% endif %}
+  
+  <!-- Porter Community Message -->
+  <div class="mt-16">
+    <div class="card bg-gradient-to-br from-accent/10 to-warning/10 shadow-xl border border-accent/30">
+      <div class="card-body text-center p-8">
+        <div class="flex items-center justify-center gap-2 mb-4">
+          <span class="text-2xl">🍄</span>
+          <h3 class="text-xl font-bold text-accent">Quick Wisdom</h3>
+        </div>
+        <p class="text-base-content/80 max-w-2xl mx-auto">
+          "The best tips come from those moments when something finally clicks. We collect these insights not just to remember them, but to help other developers skip the struggle and get to the breakthrough faster."
+        </p>
+        <p class="text-sm text-base-content/60 mt-3 italic">
+          - The Porter Community
+        </p>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,5 +1,5 @@
 ---
 layout: home
-title: "Sour Theme - Coding in the Digital Age"
-description: "A cyberpunk-themed blog exploring cutting-edge web development, coding tutorials, and futuristic technologies."
+title: "Porters' Path"
+description: "The Portobello developer blog - growing knowledge, one post at a time"
 ---

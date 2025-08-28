@@ -1,22 +1,19 @@
-# Sour Theme
+# Porter's Path
 
-A minimal, responsive, and SEO-friendly Jekyll theme built with TailwindCSS and DaisyUI components. Perfect for developers who want a clean, modern blog with cyberpunk aesthetics and powerful features out of the box.
-
-![Sour Theme](https://via.placeholder.com/800x400/1a1a2e/eee?text=Sour+Theme+Screenshot)
+A developer blog featuring a community of mushroom mascots called "Porters" who guide readers through software development topics. Built with Jekyll, TailwindCSS, and DaisyUI components, combining technical content with approachable, community-driven storytelling.
 
 ## ✨ Features
 
-- **Modern Stack**: Jekyll 4.4.1 + TailwindCSS 4.x + DaisyUI components
-- **Responsive Design**: Mobile-first approach with clean, professional layouts
+- **Unique Character-Driven Content**: Learn through the Porter community's diverse perspectives
+- **Modern Tech Stack**: Jekyll 4.4.1 + TailwindCSS 4.x + DaisyUI components  
+- **Fantasy Theme**: Immersive design with mushroom-inspired aesthetics
+- **Multi-Voice Teaching**: Different Porter characters explain concepts from various angles
+- **Growth-Oriented Learning**: Content focused on continuous improvement and community learning
 - **SEO Optimized**: Built-in SEO tags, sitemap, and structured data
-- **Dark Theme**: Cyberpunk-inspired theme with customizable color schemes
-- **Performance**: Optimized CSS compilation and fast page loads
-- **Developer Friendly**: Well-documented code with extensive customization options
-- **Rich Features**: Search, tags, categories, reading time, and more
+- **Rich Features**: Search, tags, categories, reading time, and responsive design
 
 ## 🚀 Quick Start
 
-📖 **For detailed setup instructions, see our [Getting Started Guide](GETTING_STARTED.md)**
 
 ### Prerequisites
 
@@ -26,10 +23,10 @@ A minimal, responsive, and SEO-friendly Jekyll theme built with TailwindCSS and 
 
 ### Installation
 
-1. **Clone or fork this repository:**
+1. **Clone this repository:**
    ```bash
-   git clone https://github.com/your-username/jekyll-theme-sour.git
-   cd jekyll-theme-sour
+   git clone https://github.com/jeremycardona/porters-path.git
+   cd porters-path
    ```
 
 2. **Install dependencies:**
@@ -51,7 +48,7 @@ A minimal, responsive, and SEO-friendly Jekyll theme built with TailwindCSS and 
    http://localhost:4000
    ```
 
-Your site should now be running locally with live reload enabled!
+Your Porter's Path blog should now be running locally with live reload enabled!
 
 ## 📁 Project Structure
 
@@ -75,9 +72,9 @@ Your site should now be running locally with live reload enabled!
 └── Makefile           # Development commands
 ```
 
-## ✍️ Writing Content
+## ✍️ Writing Porter Content
 
-### Creating Blog Posts
+### Creating Blog Posts with Porter Voices
 
 1. Create a new file in `_posts/` with the format: `YYYY-MM-DD-title.md`
 2. Add frontmatter with required fields:
@@ -85,31 +82,33 @@ Your site should now be running locally with live reload enabled!
 ```markdown
 ---
 layout: post
-title: "Your Amazing Post Title"
+title: "Learning React Hooks: A Porter's Journey"
 date: 2024-01-15 12:00:00 -0000
-author: Your Name
-tags: [tag1, tag2, tag3]
-excerpt: "A brief description of your post for previews"
-description: "SEO description for search engines"
+author: The Porters
+tags: [react, hooks, javascript, learning]
+excerpt: "Join the Porters as they explore React hooks and share their discoveries"
+description: "Learn React hooks through the diverse perspectives of the Porter community"
 ---
 
 # Your content here
 
-Write your blog post content using Markdown syntax.
+Write your blog post using the Porter voices and growth-oriented tone described in CLAUDE.md.
 ```
 
-### Available Frontmatter Options
+### Porter Character Integration
+
+Use these frontmatter fields to specify which Porter voices feature in your content:
 
 ```yaml
-layout: post                    # Required: use 'post' for blog posts
-title: "Post Title"            # Required: post title
-date: 2024-01-15 12:00:00 -0000 # Required: publication date
-author: "Author Name"          # Optional: author name
-tags: [tag1, tag2]             # Optional: array of tags
-category: "category-name"      # Optional: single category
-excerpt: "Short description"   # Optional: post preview text
-description: "SEO description" # Optional: meta description
-image: "/assets/images/post.jpg" # Optional: featured image
+layout: post                         # Required: use 'post' for blog posts
+title: "Post Title"                 # Required: post title
+date: 2024-01-15 12:00:00 -0000      # Required: publication date
+author: "The Porters"               # Recommended: use "The Porters" 
+tags: [tag1, tag2]                  # Optional: array of tags
+category: "category-name"           # Optional: single category
+excerpt: "Short description"        # Optional: post preview text
+description: "SEO description"      # Optional: meta description
+porter_voices: [junior, senior]     # Optional: which Porter perspectives are featured
 ---
 ```
 
@@ -131,31 +130,35 @@ description: "Page description for SEO"
 Your page content here.
 ```
 
-## 🎨 Customization
+## 🍄 Porter Character Guide
 
-### Changing Colors and Theme
+### The Porter Community
 
-The theme uses DaisyUI's theming system. Edit `_layouts/default.html`:
+- **Junior Porter**: New developer voice for beginner-friendly content
+- **Senior Porter**: Experienced developer sharing architectural insights  
+- **Explorer Porter**: Always trying new technologies and frameworks
+- **Frontend Porter**: UI/UX focused development content
+- **Backend Porter**: Server-side and database expertise
+- **DevOps Porter**: Infrastructure and deployment guidance
 
-```html
-<!-- Change data-theme attribute -->
-<html data-theme="cyberpunk">
-```
+### Writing with Porter Voices
 
-Available themes: `light`, `dark`, `cyberpunk`, or [create custom themes](https://daisyui.com/docs/themes/).
+See `CLAUDE.md` for detailed voice guidelines and examples of how to integrate Porter perspectives naturally into your technical content.
+
+## 🎨 Site Configuration
 
 ### Modifying Site Information
 
 Edit `_config.yml`:
 
 ```yaml
-title: Your Site Title
+title: "Porter's Path"
 email: your-email@example.com
-description: Your site description
+description: "A developer blog featuring the Porter community"
 url: "https://yoursite.com"
 twitter_username: yourusername
 github_username: yourusername
-author: Your Name
+author: The Porters
 ```
 
 ### Customizing Navigation
@@ -189,7 +192,7 @@ Add custom styles to `src/input.css`:
 
 ## 🔌 Jekyll Plugins
 
-This theme includes powerful Jekyll plugins:
+Porter's Path includes powerful Jekyll plugins:
 
 ### SEO and Social Media
 - `jekyll-seo-tag`: Automatic SEO tags
@@ -270,12 +273,12 @@ bundle exec jekyll build              # Build site
 
 ## 📱 Search Functionality
 
-The theme includes a built-in search feature:
+Porter's Path includes a built-in search feature:
 
 1. Search data is generated in `search.json`
-2. Search modal is included in `_includes/search.html`
+2. Search modal is included in `_includes/search.html`  
 3. Triggered by the search input in the navbar
-4. Searches through post titles, content, and tags
+4. Searches through post titles, content, tags, and Porter voices
 
 To customize search, modify `search.json` and `_includes/search.html`.
 
@@ -284,8 +287,8 @@ To customize search, modify `search.json` and `_includes/search.html`.
 ### GitHub Pages
 
 1. Enable GitHub Pages in repository settings
-2. Set source to "GitHub Actions"
-3. The theme will build automatically on push
+2. Set source to "GitHub Actions"  
+3. Porter's Path will build automatically on push
 
 ### Netlify
 
@@ -298,57 +301,58 @@ To customize search, modify `search.json` and `_includes/search.html`.
 1. Run `npm run build`
 2. Upload `_site` folder to your server
 
-## 📝 Content Guidelines
+## 📝 Porter Writing Guidelines
 
-### Writing Tips
+### Writing Tips for Porter Content
 
-1. **Use meaningful headings** for better SEO and readability
-2. **Add excerpts** to frontmatter for better post previews
-3. **Tag consistently** for better organization
-4. **Include descriptions** for social media sharing
-5. **Optimize images** before adding to posts
+1. **Use Porter perspectives** to explain concepts from multiple angles
+2. **Write growth-oriented content** that encourages continuous learning  
+3. **Include Porter dialogue** naturally without forcing character interactions
+4. **Tag consistently** including Porter voice tags (junior, senior, explorer, etc.)
+5. **Focus on community learning** rather than individual expertise
 
-### Markdown Features
+### Porter Content Features
 
-This theme supports all standard Markdown plus:
+Porter's Path supports all standard Markdown plus:
 
-- Syntax highlighting with Rouge
-- Tables
-- Task lists
-- Footnotes
-- Math equations (when enabled)
+- Syntax highlighting with Rouge for code examples
+- Tables for data comparison
+- Task lists for tutorial steps
+- Footnotes for additional context
+- Math equations (when enabled) for technical explanations
+- Porter voice integration for multi-perspective learning
 
 ## 🤝 Contributing
 
 1. Fork the repository
-2. Create a feature branch: `git checkout -b new-feature`
-3. Make your changes
+2. Create a feature branch: `git checkout -b new-porter-content`
+3. Write content following Porter voice guidelines in `CLAUDE.md`
 4. Test locally: `make serve`
-5. Commit changes: `git commit -am 'Add new feature'`
-6. Push to branch: `git push origin new-feature`
+5. Commit changes: `git commit -am 'Add new Porter content'`
+6. Push to branch: `git push origin new-porter-content`
 7. Submit a pull request
 
 ## 📄 License
 
-This theme is available as open source under the terms of the [MIT License](LICENSE).
+Porter's Path is available as open source under the terms of the [MIT License](LICENSE).
 
 ## 🆘 Support
 
-- **Documentation**: Check this README and `CLAUDE.md`
+- **Documentation**: Check this README and `CLAUDE.md` for Porter voice guidelines
 - **Issues**: Open an issue on GitHub
-- **Discussions**: Use GitHub Discussions for questions
+- **Discussions**: Use GitHub Discussions for Porter content ideas
 
 ## 🎯 Roadmap
 
-- [ ] Multiple theme variants
-- [ ] Advanced search with filters
-- [ ] Comment system integration
-- [ ] Newsletter signup component
-- [ ] PWA features
-- [ ] Multi-language support
+- [ ] Interactive Porter character guides
+- [ ] Advanced search with Porter voice filtering
+- [ ] Porter-themed tutorial series
+- [ ] Community Porter submissions
+- [ ] Multi-voice content templates
+- [ ] Porter character illustrations
 
 ---
 
-**Happy blogging with Sour Theme! 🎉**
+**Happy learning with the Porters! 🍄**
 
 *Built with ❤️ using Jekyll, TailwindCSS, and DaisyUI*

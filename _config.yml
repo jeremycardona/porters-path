@@ -18,15 +18,15 @@
 # You can create any custom variable you would like, and they will be accessible
 # in the templates via {{ site.myvariable }}.
 
-title: Sour Theme
+title: Porters Path
 email: jeremy.cardona@hotmail.com
 description: >- # this means to ignore newlines until "baseurl:"
-  A template for a responsive and SEO-friendly Jekyll theme built with TailwindCSS and DaisyUI components. 
-baseurl: "/jekyll-theme-sour" # the subpath of your site, e.g. /blog
+  The Portobello developer blog - growing knowledge, one post at a time 
+baseurl: "/porters-path" # the subpath of your site, e.g. /blog
 url: "https://jeremycardona.github.io" # the base hostname & protocol for your site, e.g. http://example.com
 # twitter_username: cyberdevblog
 github_username: jeremycardona
-author: Sour Theme
+author: Jeremy Cardona
 
 # Build settings
 # theme: minima
@@ -82,10 +82,29 @@ comments:
   enabled: true
   provider: "utterances"
   utterances:
-    repo: "jeremycardona/jekyll-theme-sour"  # Your GitHub username/repository
+    repo: "jeremycardona/porters-path"  # Your GitHub username/repository
     issue-term: "pathname"                    # Use page pathname as issue title
     theme: "preferred-color-scheme"           # Matches your site's theme switching
     crossorigin: "anonymous"
+
+# Jekyll Collections
+collections:
+  tutorials:
+    output: true
+    permalink: /tutorials/:name/
+    sort_by: date
+  roadmaps:
+    output: true
+    permalink: /roadmaps/:path/
+    sort_by: date
+  tips:
+    output: true
+    permalink: /tips/:name/
+    sort_by: date
+  guides:
+    output: true
+    permalink: /guides/:name/
+    sort_by: date
 
 # Include _pages directory for custom pages
 include:
