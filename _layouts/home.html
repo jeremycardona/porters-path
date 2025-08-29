@@ -4,7 +4,7 @@ title: "Porters' Path - Home"
 description: "Welcome to Porters' Path, your go-to resource for web development tutorials, roadmaps, and tips."
 ---
 
-<!-- Hero Section - Porter's Path Welcome -->
+<!-- Hero Section - Porters' Path Welcome -->
 <section class="py-16 text-center relative overflow-hidden">
   <!-- Background pattern -->
   <div class="absolute inset-0 opacity-5">
@@ -31,14 +31,14 @@ description: "Welcome to Porters' Path, your go-to resource for web development 
     
     <!-- Call to Action Buttons -->
     <div class="flex flex-col sm:flex-row gap-4 justify-center mb-12">
-      <a href="/collections/" class="btn btn-secondary btn-lg group">
+      <a href="{{ '/collections/' | relative_url }}" class="btn btn-secondary btn-lg group">
         <span class="text-2xl mr-2">🗺️</span>
         <span>Browse Topics</span>
         <svg class="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
         </svg>
       </a>
-      <a href="/posts/" class="btn btn-outline btn-lg">
+      <a href="{{ '/posts/' | relative_url }}" class="btn btn-outline btn-lg">
         <span class="text-xl mr-2">📚</span>
         <span>Latest Posts</span>
       </a>
@@ -56,7 +56,7 @@ description: "Welcome to Porters' Path, your go-to resource for web development 
           {{ main_roadmaps.size }}
         </div>
         <p class="text-sm text-base-content/70 mb-4">Structured learning paths</p>
-        <a href="/collections/roadmaps/" class="btn btn-secondary btn-sm">Explore Paths</a>
+        <a href="{{ '/collections/roadmaps/' | relative_url }}" class="btn btn-secondary btn-sm">Explore Paths</a>
       </div>
     </div>
     
@@ -67,7 +67,7 @@ description: "Welcome to Porters' Path, your go-to resource for web development 
         <h3 class="card-title justify-center text-lg text-secondary mb-2">Tutorials</h3>
         <div class="text-2xl font-bold text-accent mb-2">{{ site.tutorials.size }}</div>
         <p class="text-sm text-base-content/70 mb-4">Step-by-step guides</p>
-        <a href="/collections/tutorials/" class="btn btn-secondary btn-sm">Start Learning</a>
+        <a href="{{ '/collections/tutorials/' | relative_url }}" class="btn btn-secondary btn-sm">Start Learning</a>
       </div>
     </div>
     
@@ -78,7 +78,7 @@ description: "Welcome to Porters' Path, your go-to resource for web development 
         <h3 class="card-title justify-center text-lg text-secondary mb-2">Blog Posts</h3>
         <div class="text-2xl font-bold text-accent mb-2">{{ site.posts.size }}</div>
         <p class="text-sm text-base-content/70 mb-4">Knowledge articles</p>
-        <a href="/posts/" class="btn btn-secondary btn-sm">Read Stories</a>
+        <a href="{{ '/posts/' | relative_url }}" class="btn btn-secondary btn-sm">Read Stories</a>
       </div>
     </div>
   </div>
