@@ -2,14 +2,14 @@
 layout: default
 ---
 
-<div class="hero bg-gradient-to-br from-primary/20 to-secondary/20 py-12">
+<div class="hero bg-gradient-to-br from-accent/20 to-primary/20 py-12">
   <div class="hero-content text-center">
     <div class="max-w-4xl">
       <div class="flex items-center justify-center gap-3 mb-4">
-        <span class="text-3xl">📚</span>
-        <div class="badge badge-primary">Tutorial</div>
+        <span class="text-3xl">🗺️</span>
+        <div class="badge badge-accent">Roadmap</div>
       </div>
-      <h1 class="text-4xl md:text-5xl font-bold mb-6 text-primary [text-shadow:0_0_20px_currentColor]">
+      <h1 class="text-4xl md:text-5xl font-bold mb-6 text-accent [text-shadow:0_0_20px_currentColor]">
         {{ page.title }}
       </h1>
       {% if page.excerpt %}
@@ -20,13 +20,13 @@ layout: default
       
       <div class="flex flex-wrap justify-center gap-3">
         {% if page.porter_voice %}
-          <div class="badge badge-primary badge-lg">{{ page.porter_voice | capitalize }} Porter</div>
+          <div class="badge badge-accent badge-lg">{{ page.porter_voice | capitalize }} Porter</div>
         {% endif %}
-        {% if page.difficulty %}
-          <div class="badge badge-secondary badge-lg">{{ page.difficulty | capitalize }}</div>
+        {% if page.skill_level %}
+          <div class="badge badge-secondary badge-lg">{{ page.skill_level | capitalize }} Level</div>
         {% endif %}
-        {% if page.estimated_time %}
-          <div class="badge badge-accent badge-lg">{{ page.estimated_time }}</div>
+        {% if page.timeline %}
+          <div class="badge badge-primary badge-lg">{{ page.timeline }}</div>
         {% endif %}
       </div>
     </div>
@@ -37,52 +37,45 @@ layout: default
   <div class="grid grid-cols-1 lg:grid-cols-4 gap-8">
     <!-- Main Content -->
     <div class="lg:col-span-3">
-      <!-- Tutorial Meta Info -->
-      {% if page.prerequisites or page.tools or page.technologies %}
-        <div class="card bg-base-100 shadow-xl border border-primary/30 mb-8">
+      <!-- Roadmap Meta Info -->
+      {% if page.overview or page.key_technologies or page.milestones %}
+        <div class="card bg-base-100 shadow-xl border border-accent/30 mb-8">
           <div class="card-body p-6">
-            <h2 class="card-title text-primary mb-4">Before We Start</h2>
+            <h2 class="card-title text-accent mb-4">Roadmap Overview</h2>
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-              {% if page.prerequisites %}
-                <div>
-                  <h3 class="font-semibold text-sm mb-2">Prerequisites</h3>
-                  <ul class="space-y-1">
-                    {% for prereq in page.prerequisites %}
-                      <li class="text-sm flex items-center gap-2">
-                        <svg class="w-3 h-3 text-success" fill="currentColor" viewBox="0 0 20 20">
-                          <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
-                        </svg>
-                        {{ prereq }}
-                      </li>
-                    {% endfor %}
-                  </ul>
+              {% if page.overview %}
+                <div class="md:col-span-3">
+                  <h3 class="font-semibold text-sm mb-2">What You'll Learn</h3>
+                  <div class="prose prose-sm max-w-none">
+                    {{ page.overview | markdownify }}
+                  </div>
                 </div>
               {% endif %}
               
-              {% if page.tools %}
+              {% if page.key_technologies %}
                 <div>
-                  <h3 class="font-semibold text-sm mb-2">Tools Needed</h3>
-                  <ul class="space-y-1">
-                    {% for tool in page.tools %}
-                      <li class="text-sm flex items-center gap-2">
-                        <svg class="w-3 h-3 text-info" fill="currentColor" viewBox="0 0 20 20">
-                          <path fill-rule="evenodd" d="M12.316 3.051a1 1 0 01.633 1.265l-4 12a1 1 0 11-1.898-.632l4-12a1 1 0 011.265-.633zM5.707 6.293a1 1 0 010 1.414L3.414 10l2.293 2.293a1 1 0 11-1.414 1.414l-3-3a1 1 0 010-1.414l3-3a1 1 0 011.414 0zm8.586 0a1 1 0 011.414 0l3 3a1 1 0 010 1.414l-3 3a1 1 0 11-1.414-1.414L16.586 10l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd"/>
-                        </svg>
-                        {{ tool }}
-                      </li>
-                    {% endfor %}
-                  </ul>
-                </div>
-              {% endif %}
-              
-              {% if page.technologies %}
-                <div>
-                  <h3 class="font-semibold text-sm mb-2">Technologies</h3>
+                  <h3 class="font-semibold text-sm mb-2">Key Technologies</h3>
                   <div class="flex flex-wrap gap-1">
-                    {% for tech in page.technologies %}
+                    {% for tech in page.key_technologies %}
                       <div class="badge badge-outline badge-sm">{{ tech }}</div>
                     {% endfor %}
                   </div>
+                </div>
+              {% endif %}
+              
+              {% if page.milestones %}
+                <div>
+                  <h3 class="font-semibold text-sm mb-2">Major Milestones</h3>
+                  <ul class="space-y-1">
+                    {% for milestone in page.milestones %}
+                      <li class="text-sm flex items-center gap-2">
+                        <svg class="w-3 h-3 text-accent" fill="currentColor" viewBox="0 0 20 20">
+                          <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                        </svg>
+                        {{ milestone }}
+                      </li>
+                    {% endfor %}
+                  </ul>
                 </div>
               {% endif %}
             </div>
@@ -90,8 +83,8 @@ layout: default
         </div>
       {% endif %}
       
-      <!-- Tutorial Content -->
-      <div class="card bg-base-100 shadow-xl border border-primary/30">
+      <!-- Roadmap Content -->
+      <div class="card bg-base-100 shadow-xl border border-accent/30">
         <div class="card-body p-8">
           <div class="post-content">
             {{ content }}
@@ -101,16 +94,16 @@ layout: default
       
       <!-- Navigation -->
       <div class="flex justify-between items-center mt-8">
-        <a href="/collections/tutorials/" class="btn btn-outline">
+        <a href="/collections/roadmaps/" class="btn btn-outline">
           <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/>
           </svg>
-          Back to Tutorials
+          Back to Roadmaps
         </a>
         
-        {% if page.next_tutorial %}
-          <a href="{{ page.next_tutorial }}" class="btn btn-primary">
-            Next Tutorial
+        {% if page.next_roadmap %}
+          <a href="{{ page.next_roadmap }}" class="btn btn-accent">
+            Next in Series
             <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7-7 7M5 12h14"/>
             </svg>
@@ -217,35 +210,35 @@ layout: default
     
     <!-- Sidebar -->
     <div class="lg:col-span-1 space-y-6">
-      <!-- Tutorial Info -->
-      <div class="card bg-base-200 shadow-xl border border-primary/30">
+      <!-- Roadmap Info -->
+      <div class="card bg-base-200 shadow-xl border border-accent/30">
         <div class="card-body p-6">
-          <h3 class="card-title text-primary text-lg mb-4">Tutorial Info</h3>
+          <h3 class="card-title text-accent text-lg mb-4">Roadmap Info</h3>
           <div class="space-y-3">
             {% if page.date %}
               <div class="flex items-center gap-2 text-sm">
-                <svg class="w-4 h-4 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg class="w-4 h-4 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
                 </svg>
                 {{ page.date | date: "%B %d, %Y" }}
               </div>
             {% endif %}
             
-            {% if page.estimated_time %}
+            {% if page.timeline %}
               <div class="flex items-center gap-2 text-sm">
-                <svg class="w-4 h-4 text-secondary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg class="w-4 h-4 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
                 </svg>
-                {{ page.estimated_time }}
+                {{ page.timeline }}
               </div>
             {% endif %}
             
-            {% if page.difficulty %}
+            {% if page.skill_level %}
               <div class="flex items-center gap-2 text-sm">
-                <svg class="w-4 h-4 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg class="w-4 h-4 text-secondary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
                 </svg>
-                {{ page.difficulty | capitalize }} Level
+                {{ page.skill_level | capitalize }} Level
               </div>
             {% endif %}
             
@@ -259,35 +252,35 @@ layout: default
         </div>
       </div>
       
-      <!-- Related Tutorials -->
-      {% assign related_tutorials = site.tutorials | where_exp: "item", "item.url != page.url" | limit: 3 %}
-      {% if related_tutorials.size > 0 %}
-        <div class="card bg-base-200 shadow-xl border border-primary/30">
+      <!-- Related Roadmaps -->
+      {% assign related_roadmaps = site.roadmaps | where_exp: "item", "item.url != page.url" | limit: 3 %}
+      {% if related_roadmaps.size > 0 %}
+        <div class="card bg-base-200 shadow-xl border border-accent/30">
           <div class="card-body p-6">
-            <h3 class="card-title text-primary text-lg mb-4">More Tutorials</h3>
+            <h3 class="card-title text-accent text-lg mb-4">More Roadmaps</h3>
             <div class="space-y-3">
-              {% for tutorial in related_tutorials %}
+              {% for roadmap in related_roadmaps %}
                 <div class="p-3 bg-base-100 rounded-lg hover:bg-base-300 transition-colors">
                   <h4 class="font-semibold text-sm mb-1">
-                    <a href="{{ tutorial.url | relative_url }}" class="link link-hover">{{ tutorial.title }}</a>
+                    <a href="{{ roadmap.url | relative_url }}" class="link link-hover">{{ roadmap.title }}</a>
                   </h4>
-                  {% if tutorial.difficulty %}
-                    <div class="badge badge-outline badge-xs">{{ tutorial.difficulty }}</div>
+                  {% if roadmap.skill_level %}
+                    <div class="badge badge-outline badge-xs">{{ roadmap.skill_level }}</div>
                   {% endif %}
                 </div>
               {% endfor %}
             </div>
             <div class="mt-4">
-              <a href="/collections/tutorials/" class="btn btn-outline btn-sm w-full">View All Tutorials</a>
+              <a href="/collections/roadmaps/" class="btn btn-outline btn-sm w-full">View All Roadmaps</a>
             </div>
           </div>
         </div>
       {% endif %}
       
       <!-- Share -->
-      <div class="card bg-base-200 shadow-xl border border-primary/30">
+      <div class="card bg-base-200 shadow-xl border border-accent/30">
         <div class="card-body p-6">
-          <h3 class="card-title text-primary text-lg mb-4">Share Tutorial</h3>
+          <h3 class="card-title text-accent text-lg mb-4">Share Roadmap</h3>
           <div class="flex gap-2">
             <a href="https://twitter.com/intent/tweet?url={{ page.url | absolute_url }}&text={{ page.title | url_encode }}" 
                target="_blank" rel="noopener" class="btn btn-square btn-sm">

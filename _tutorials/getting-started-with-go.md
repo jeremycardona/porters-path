@@ -32,7 +32,7 @@ Head over to the [official Go downloads page](https://go.dev/doc/install) where 
 
 ### Install Go by Operating System
 
-Installation varies from OS, so after downloading your file follow the instructuctions. Some OS are simpler than others and just require you to follow the prompts. I had an issue downloading the latest Go version because I had an older version installed with the package manager and it created some trouble when I was verifying the Go version, besides that it's actually easy!
+Installation varies from OS, so after downloading your file, follow the instructions. Some OS are simpler than others and just require you to follow the prompts. I had an issue downloading the latest Go version because I had an older version installed with the package manager, and it created some trouble when I was verifying the Go version. Besides that, it's actually easy!
 
 ### Verify Your Installation
 
