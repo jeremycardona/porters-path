@@ -96,7 +96,7 @@ layout: default
       
       <!-- Navigation -->
       <div class="flex justify-between items-center mt-8">
-        <a href="/collections/tips/" class="btn btn-outline">
+        <a href="{{ '/collections/tips/' | relative_url }}" class="btn btn-outline">
           <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/>
           </svg>
@@ -291,7 +291,7 @@ layout: default
               {% endfor %}
             </div>
             <div class="mt-4">
-              <a href="/collections/tips/" class="btn btn-outline btn-sm w-full">View All Tips</a>
+              <a href="{{ '/collections/tips/' | relative_url }}" class="btn btn-outline btn-sm w-full">View All Tips</a>
             </div>
           </div>
         </div>
