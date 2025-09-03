@@ -115,6 +115,8 @@ You've successfully:
 
 You're now ready to continue our Go foundations journey!
 
+**Next**: [Why Use Go]({{ '/roadmaps/golang/foundations/why-go/' | relative_url }}) - Let's explore together why Go has become such a popular choice for modern development.
+
 ## Troubleshooting
 
 **Problem**: `go.mod` file issues
@@ -125,3 +127,5 @@ You're now ready to continue our Go foundations journey!
 Great job making it through your first Go program! You're well on your way to becoming a Go developer. Remember, every expert was once a beginner - keep practicing and don't be afraid to experiment!
 
 *Having trouble with your first program? Don't hesitate to reach out to the Porter community - we're here to help each other grow!*
+
+*View all foundation topics: [Go Foundations Overview]({{ "/roadmaps/golang/foundations/" | relative_url }})*

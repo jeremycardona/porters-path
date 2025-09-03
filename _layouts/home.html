@@ -52,8 +52,15 @@ description: "Welcome to Porters' Path, your go-to resource for web development 
         <div class="text-4xl mb-4">🗺️</div>
         <h3 class="card-title justify-center text-lg text-secondary mb-2">Learning Roadmaps</h3>
         <div class="text-2xl font-bold text-accent mb-2">
-          {% assign main_roadmaps = site.roadmaps | where_exp: "item", "item.name == 'index'" %}
-          {{ main_roadmaps.size }}
+          {% assign main_roadmaps = site.roadmaps | where_exp: "item", "item.name == 'index.md'" | where_exp: "item", "item.path contains '_roadmaps/'" | where_exp: "item", "item.path contains '/index.md'" %}
+          {% assign temp_roadmaps = "" | split: "," %}
+          {% for roadmap in main_roadmaps %}
+            {% assign path_parts = roadmap.path | split: "/" %}
+            {% if path_parts.size == 3 %}
+              {% assign temp_roadmaps = temp_roadmaps | push: roadmap %}
+            {% endif %}
+          {% endfor %}
+          {{ temp_roadmaps.size }}
         </div>
         <p class="text-sm text-base-content/70 mb-4">Structured learning paths</p>
         <a href="{{ '/collections/roadmaps/' | relative_url }}" class="btn btn-secondary btn-sm">Explore Paths</a>

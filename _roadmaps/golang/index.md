@@ -27,22 +27,8 @@ technologies:
 steps:
   - title: "Go Foundations"
     description: "Start our Go journey together - installation, first programs, and core concepts"
-    sections:
-      - title: "Go Installation & Setup"
-        link: "/roadmaps/golang/foundations/setup/"
-        description: "Community setup of Go development environment"
-      - title: "Your First Go Program"
-        link: "/roadmaps/golang/foundations/first-program/"
-        description: "Hello World and understanding Go program structure"
-      - title: "Why use Go"
-        link: "/roadmaps/golang/foundations/why-go/"
-        description: "Why use Go as our programming language"
-      - title: "History of Go"
-        link: "/roadmaps/golang/foundations/go-history/"
-        description: "Who created Go? How did it begin?"
-      - title: "go command"
-        link: "/roadmaps/golang/foundations/go-command/"
-        description: "Main tool managing Go source code"
+    link: "/roadmaps/golang/foundations/"
+    overview: "Complete foundation covering Go installation, first programs, design philosophy, history, and essential commands"
 
 overview: |
   We're learning Go together as a community, following the roadmap.sh path with shared discoveries and daily progress. Every Porter brings different perspectives that make our collective understanding richer.
@@ -153,11 +139,9 @@ Ready to begin? Here's where our community learning path starts:
 ### {{ step.title }}
 {{ step.description }}
 
-{% for section in step.sections %}
-**{{ section.title }}**  
-{{ section.description }}  
-[Start Learning →]({{ section.link | relative_url }})
-{% endfor %}
+{{ step.overview }}
+
+[Start Foundations →]({{ step.link | relative_url }})
 
 ---
 {% endfor %}
